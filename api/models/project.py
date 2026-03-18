@@ -89,18 +89,27 @@ class Project(BaseModel):
         """
         Encode a project path to Claude's directory name format.
 
+        Claude Code CLI encodes paths as follows:
+        - macOS/Linux: leading '/' is dropped, remaining '/' and '_' replaced with '-'
+          e.g. /Users/me/my_proj -> -Users-me-my-proj
+        - Windows: backslashes normalized to forward slashes first,
+          then drive letter colon is preserved as-is before slash replacement
+          e.g. C:\\Users\\me\\my_proj -> -C:-Users-me-my-proj
+
         Args:
-            path: Absolute project path
+            path: Absolute project path (str or Path object)
 
         Returns:
-            Encoded directory name (e.g., -Users-me-repo)
+            Encoded directory name starting with '-'
         """
         p = str(path)
-        # Claude's encoding: replace '/' with '-' (leading '/' becomes leading '-')
+        # Normalize Windows backslashes to forward slashes
         p = p.replace("\\", "/")
+        # Strip leading slash on Unix paths so we can prepend our '-'
         if p.startswith("/"):
             p = p[1:]
-        return "-" + p.replace("/", "-")
+        # Replace path separators and underscores with hyphens
+        return "-" + p.replace("/", "-").replace("_", "-")
 
     @staticmethod
     def decode_path(encoded: str) -> str:

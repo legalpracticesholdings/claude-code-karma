@@ -18,7 +18,12 @@
  * const response = await fetch(`${API_BASE}/projects`);
  * ```
  */
-export const API_BASE = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+import { browser } from '$app/environment';
+
+export const API_BASE = browser 
+    ? (import.meta.env.PUBLIC_API_URL || 'http://localhost:9005')
+    // @ts-ignore: TS doesn't know process.env here but it's injected by Node Adapter
+    : (process.env.INTERNAL_API_URL || import.meta.env.PUBLIC_API_URL || 'http://localhost:9005');
 
 /**
  * API request timeout in milliseconds (default: 30 seconds)

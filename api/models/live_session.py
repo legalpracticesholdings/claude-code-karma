@@ -237,12 +237,31 @@ class LiveSessionState(BaseModel):
         For worktree sessions, the transcript_path may point to the worktree's
         encoded project dir, but Claude Code may store the JSONL under the real
         project's dir (using git_root). Check both locations.
+        Also handles Docker volume mapping where host absolute paths differ from
+        container absolute paths.
         """
         if not self.transcript_path:
             return False
+            
         tp = Path(self.transcript_path)
         if tp.exists():
             return True
+
+        # Handle Docker host-to-container volume mapping differences
+        try:
+            from config import settings
+            parts = tp.parts
+            if "projects" in parts:
+                idx = parts.index("projects")
+                if len(parts) > idx + 1:
+                    rel_path = Path(*parts[idx+1:])
+                    mapped_tp = settings.projects_dir / rel_path
+                    if mapped_tp.exists():
+                        return True
+                    # Let fallback use the mapped path
+                    tp = mapped_tp
+        except Exception:
+            pass
 
         # Fallback: check under the git_root-derived project dir
         # e.g., transcript_path encodes worktree cwd, but JSONL is under git_root project

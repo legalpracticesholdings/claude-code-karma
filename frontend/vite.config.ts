@@ -4,6 +4,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	plugins: [sveltekit(), tailwindcss()],
+	server: {
+		port: 5199,
+		strictPort: true
+	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
 		environment: 'jsdom',

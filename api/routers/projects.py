@@ -98,6 +98,11 @@ def resolve_project_identifier(identifier: str) -> str:
     )
 
     if identifier.startswith("-"):
+        # Normalize legacy encoded_names that may contain underscores.
+        # Claude Code CLI always encodes underscores as hyphens, so
+        # URLs with underscores are "old" style and need to be canonicalized.
+        identifier = identifier.replace("_", "-")
+
         # Safety net: redirect worktree encoded names to real project
         if is_worktree_project(identifier):
             try:

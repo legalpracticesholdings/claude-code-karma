@@ -90,6 +90,11 @@ class TestEncodePath:
         result = Project.encode_path("Users/test/myproject")
         assert result == "-Users-test-myproject"
 
+    def test_encode_path_with_underscores(self):
+        """Test encoding a path containing underscores."""
+        result = Project.encode_path("/Users/test_user/my_project")
+        assert result == "-Users-test-user-my-project"
+
 
 class TestEncodePathWindowsBackslashes:
     """Tests for Project.encode_path() with Windows paths."""

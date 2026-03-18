@@ -97,10 +97,21 @@ class ArchivedProject:
 
 
 def encode_path(path: str) -> str:
-    """Encode a path to Claude's format: /Users/me/repo -> -Users-me-repo"""
-    if path.startswith("/"):
-        return "-" + path[1:].replace("/", "-")
-    return path.replace("/", "-")
+    """
+    Encode a path to Claude's directory name format.
+
+    Handles macOS/Linux paths (/Users/...) and Windows paths (C:\\Users\\...).
+    Underscores and path separators are replaced with hyphens.
+
+    Examples:
+        /Users/me/repo -> -Users-me-repo
+        C:\\Users\\me\\repo -> -C:-Users-me-repo
+    """
+    # Normalize Windows backslashes
+    p = path.replace("\\", "/")
+    if p.startswith("/"):
+        return "-" + p[1:].replace("/", "-").replace("_", "-")
+    return "-" + p.replace("/", "-").replace("_", "-")
 
 
 def get_project_name(path: str) -> str:
