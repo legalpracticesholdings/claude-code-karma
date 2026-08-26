@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v2 (working — not yet generated)
+**Version:** v3 (working — not yet generated)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -10,12 +10,15 @@
 ## Changelog
 - **v2** — trail bike replaced with a black Asian maxi-scooter (Honda PCX type).
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
+- **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
+- **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
 
 ---
 
 ## Prompt A — establishing keyframe (image)
 
 References: **1)** approved Ug caricature (character + art style) · **2)** black scooter photo (machine)
+· **3)** rice-paddy photos (setting, hats, working postures)
 
 > Cartoon illustration in EXACTLY the art style of the first reference: bold varied-weight ink
 > outlines, flat cel shading with cross-hatch texture accents, saturated comic-book palette.
@@ -38,8 +41,14 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 > handlebars at the RIGHT-hand end, tail and exhaust at the LEFT-hand end — pointing the same
 > direction Ug is walking. Perfectly ordinary, modern, and completely out of place here.
 >
-> **SETTING.** Dry prehistoric savannah at golden hour: ochre-red dust, palms and cycads,
-> scrub hills, a distant blue-grey volcano with a smoke plume, warm teal-to-amber sky.
+> **SETTING — rural Vietnam.** Ug walks along a dry ochre dirt track on a raised earth bund.
+> Immediately behind him, filling the middle of the frame, are **flooded rice paddies**: mirror-flat
+> water reflecting the sky, brilliant green rice shoots in neat rows, low earth bunds dividing the
+> fields. Working those paddies are **Vietnamese farmers in conical straw nón lá hats** — simple
+> work shirts and rolled trousers, several bent double planting seedlings, one straightened up with
+> a bundle of rice under one arm, one further off carrying a bucket along a bund. Beyond the fields,
+> hazy grey-green **limestone karst peaks** rise out of the mist, with a few coconut palms and a
+> distant tin-roofed farm building. Warm, humid, bright daylight; soft teal-to-cream sky.
 >
 > Full-bleed illustration. No text, no captions, no watermark.
 
@@ -59,14 +68,21 @@ Start image: the keyframe above.
 > settles onto the seat, and buzzes away to the RIGHT in a billowing cloud of ochre dust, exiting
 > the frame.
 >
+> Behind him the rice paddies and the farmers in conical hats stay busy throughout — bending,
+> planting, the water rippling — an ordinary working day going on regardless.
+>
 > Camera pans right to follow him. Hand-drawn cartoon animation, bold ink outlines, flat cel
 > shading. No text, no captions, no subtitles, no watermark.
 
 ---
 
 ## Open items
-1. Does the **setting** stay prehistoric, or move to Asia (paddies, karst hills, temple gate)? The
-   current palms + volcano already read tropical, which straddles both.
+1. **Do the farmers notice Ug?** Right now they work on obliviously, which is its own joke. One or
+   two straightening up to stare as a caveman buzzes past on a scooter is the bigger laugh — but it
+   is an added beat, so it is yours to call.
 2. A scooter is not a dirt bike — a **wheelie is out of character**. Currently replaced with a
    flat buzz-off. Restore a comic pop (front wheel hop / bogged-down whine) if wanted.
-3. Scooter **colour**: matching the black reference, or something that pops against the ochre?
+3. Scooter **colour**: matching the black reference, or something that pops? Black against dark
+   water and green rice is now a weaker read than it was against bare ochre.
+4. **Is Ug still a caveman here?** Paddies and modern farmers make him the only prehistoric thing in
+   frame. That is probably the gag — worth confirming it is deliberate.
