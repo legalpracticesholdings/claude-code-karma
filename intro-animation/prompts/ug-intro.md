@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v5 (working — not yet generated)
+**Version:** v6 (locked — ready to generate)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,8 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v6** — paddies are **lush green growing rice, not flooded mirror water**. Aesthetics aside, the deciding factor is technical: rippling water and reflections are where AI video artefacts live, and that render budget is better spent on Ug than on background nobody is watching.
+- **v6** — scooter **locked black** with chrome and pale detail. It keeps the machine mundane, which is what the wheelie and the V8 play against, and a dark silhouette separates cleanly from mid-green.
 - **v5** — one or two farmers now **glance up as Ug tears past**, tracked by the swing of their conical hat brims. Deliberately written as fleeting and background-scale: at this length a staged reaction would eat the gag rather than add to it.
 - **v5** — the scooter now sounds like a **thunderous V8**, not a scooter. Same joke as the wheelie, in the audio track.
 - **v4** — the **vaulting mount and the wheelie exit are both restored**, and deliberately played as absurd rather than corrected for realism. A commuter scooter is the funnier machine to do these on, not the reason to drop them.
@@ -38,16 +40,18 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 >
 > **THE MACHINE — a modern Asian scooter, NOT a dirt bike and NOT a trail bike.** In the RIGHT
 > third of frame, drawn from the second reference photo: a glossy black step-through maxi-scooter
-> (Honda PCX type) — tall clear windscreen, twin mirrors on stalks, long black bench seat, smooth
-> flowing black bodywork, small alloy wheels with a front disc brake, side stand down.
+> (Honda PCX type) — **glossy black bodywork**, tall clear windscreen, twin chrome-stalk mirrors,
+> long black bench seat with a pale grey top, smooth flowing panels, silver alloy wheels with a
+> front disc brake, a chrome exhaust, side stand down. Keep bright chrome and pale highlights on it
+> so the dark silhouette still reads as a machine and not a flat black blob.
 > **CRITICAL ORIENTATION: the scooter faces SCREEN RIGHT** — front wheel, windscreen and
 > handlebars at the RIGHT-hand end, tail and exhaust at the LEFT-hand end — pointing the same
 > direction Ug is walking. Perfectly ordinary, modern, and completely out of place here.
 >
 > **SETTING — rural Vietnam.** Ug walks along a dry ochre dirt track on a raised earth bund.
-> Immediately behind him, filling the middle of the frame, are **flooded rice paddies**: mirror-flat
-> water reflecting the sky, brilliant green rice shoots in neat rows, low earth bunds dividing the
-> fields. Working those paddies are **Vietnamese farmers in conical straw nón lá hats** — simple
+> Immediately behind him, filling the middle of the frame, are **lush green rice paddies in full
+> growth** — dense, vivid green rice standing knee-high in neat rows, low earth bunds dividing the
+> fields. Solid green fields, NOT flooded mirror-water; little or no standing water visible. Working those paddies are **Vietnamese farmers in conical straw nón lá hats** — simple
 > work shirts and rolled trousers, several bent double planting seedlings, one straightened up with
 > a bundle of rice under one arm, one further off carrying a bucket along a bund. Beyond the fields,
 > hazy grey-green **limestone karst peaks** rise out of the mist, with a few coconut palms and a
@@ -63,7 +67,7 @@ Start image: the keyframe above.
 
 > Continuous single side-on tracking shot. 2D cartoon animation holding the EXACT art style,
 > colours and character design of the starting frame — Ug's face and likeness stay identical
-> throughout, and the scooter stays the same black step-through scooter facing screen right.
+> throughout, and the scooter stays the same glossy black step-through scooter facing screen right.
 >
 > Action, fast and snappy with comedic timing: Ug trudges to the right dragging his heavy club
 > through the dust — he stops dead and jolts with surprise, eyes wide, when he clocks the scooter
@@ -81,7 +85,7 @@ Start image: the keyframe above.
 > note should be comically, impossibly oversized for the machine making it.
 >
 > Behind him the rice paddies and the farmers in conical hats work on throughout — bending,
-> planting, the water rippling. As Ug tears past, **one or two of the nearest farmers straighten up
+> planting, the green rice swaying. As Ug tears past, **one or two of the nearest farmers straighten up
 > and turn to follow him**, the wide brims of their conical hats swinging round to track him.
 > Keep this fleeting — a brief background glance caught in passing, never a staged reaction, never
 > a pause in their work. They stay small and soft in the depth of field, the camera never cuts to
@@ -93,7 +97,5 @@ Start image: the keyframe above.
 ---
 
 ## Open items
-1. Scooter **colour**: matching the black reference, or something that pops? Black against dark
-   water and green rice is now a weaker read than it was against bare ochre.
-2. **Is Ug still a caveman here?** Paddies and modern farmers make him the only prehistoric thing in
-   frame. That is probably the gag — worth confirming it is deliberate.
+None blocking. Everything above is locked; the next real information comes from generating a
+keyframe and looking at it, not from more discussion.
