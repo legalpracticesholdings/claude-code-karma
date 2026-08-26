@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v7 (orientation fix after first render)
+**Version:** v8 (wider frame, continuity pass)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,9 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v8** — **wider frame, staged in depth.** Ug starts near camera at the far left, the scooter sits smaller and further up the track, with a long visible run of dirt between them. Pulling back flat would shrink Pete's face, which is the whole point of this version, so the distance is bought with perspective instead of zoom.
+- **v8** — **camera locked off.** The whole gag plays inside one static wide frame. Camera moves are where AI video loses object permanence: whatever leaves frame can come back deformed. Keeping Ug and the scooter both visible throughout gives the model continuous reference and lets the six beats actually chain.
+- **v8** — beats **explicitly numbered** in the film prompt, so the sequence is an ordered list rather than a paragraph a model can reorder.
 - **v7** — **orientation rewritten.** The first render put the scooter facing Ug despite a capitalised instruction. Single left/right statements are unreliable in image models, so the direction is now pinned by four redundant anchors: which end is nearest Ug, which named parts sit at which end, which flank we view, and two explicit negatives.
 - **v6** — paddies are **lush green growing rice, not flooded mirror water**. Aesthetics aside, the deciding factor is technical: rippling water and reflections are where AI video artefacts live, and that render budget is better spent on Ug than on background nobody is watching.
 - **v6** — scooter **locked black** with chrome and pale detail. It keeps the machine mundane, which is what the wheelie and the V8 play against, and a dark silhouette separates cleanly from mid-green.
@@ -35,9 +38,13 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 > over one shoulder, bare hairy arms and legs, big bare feet. He hauls an enormous knobbly
 > dark-brown wooden club.
 >
-> **COMPOSITION.** Wide cinematic full-body side-on shot, 16:9. Ug is in the LEFT third of frame,
-> mid-stride walking toward the RIGHT, dragging the club behind him so its knobbly end carves a
-> furrow in the dirt and kicks up dust.
+> **COMPOSITION — wide, staged in depth.** A wide cinematic side-on establishing shot, 16:9, camera
+> pulled well back and low. **Ug is at the FAR LEFT of frame and nearest to camera**, full body,
+> mid-stride, walking toward the RIGHT along the track, dragging the club so its knobbly end carves
+> a furrow and kicks up dust. He is large enough that his face reads clearly.
+> **The scooter is further away, up the track to the RIGHT**, smaller in frame through perspective.
+> **Leave a long, open, empty run of dirt track between them** — the ground he still has to cover.
+> Both Ug and the scooter are fully inside the frame with air around them; nothing is cropped.
 >
 > **THE MACHINE — a modern Asian scooter, NOT a dirt bike and NOT a trail bike.** In the RIGHT
 > third of frame, drawn from the second reference photo: a glossy black step-through maxi-scooter
@@ -77,12 +84,19 @@ Start image: the keyframe above.
 > colours and character design of the starting frame — Ug's face and likeness stay identical
 > throughout, and the scooter stays the same glossy black step-through scooter facing screen right.
 >
-> Action, fast and snappy with comedic timing: Ug trudges to the right dragging his heavy club
-> through the dust — he stops dead and jolts with surprise, eyes wide, when he clocks the scooter
-> — he flings the club away back over his shoulder to the left, **VAULTS clean over the scooter in
-> one bound and lands astride the seat**, and the little scooter rockets away to the RIGHT with its
-> **front wheel snapping up into an improbable wheelie**, tearing off in a billowing cloud of ochre
-> dust and exiting the frame.
+> **THE CAMERA IS LOCKED OFF.** One static wide shot. Do not cut, do not zoom, do not track. Ug and
+> the scooter both stay inside the frame the entire time; the action travels left to right across
+> the shot rather than the camera following it. Only at the very end may the frame drift slightly
+> right as he goes.
+>
+> **The beats, in this exact order:**
+> **1.** Ug trudges from the far left toward the scooter, dragging his heavy club, kicking up dust.
+> **2.** He stops dead and jolts upright, eyes wide — he has spotted it.
+> **3.** He flings the club away behind him to the LEFT; it spins off out of frame.
+> **4.** He charges the last stretch of track and **VAULTS clean over the scooter in one bound,
+> landing astride the seat**.
+> **5.** The scooter's **front wheel snaps up into an improbable wheelie**.
+> **6.** He tears away to the RIGHT in a billowing cloud of ochre dust and exits the frame.
 >
 > Play the vault and the wheelie big and cartoonish — this tiny commuter scooter absolutely should
 > not be able to do either, and that is the joke.
