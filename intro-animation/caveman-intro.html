@@ -1,0 +1,848 @@
+<title>Club to Throttle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --ground:#EFE6D8; --panel:#FBF6EE; --panel-2:#F3EADC;
+    --ink:#221A14; --ink-soft:#6B5A4B; --ink-faint:#95826F;
+    --line:#DDCFBA; --line-strong:#C6B49B;
+    --accent:#C8641E; --accent-soft:#E0902F; --cool:#2C5A63;
+    --film:#12100E;
+    --shadow:0 1px 2px rgba(34,26,20,.07), 0 12px 30px -12px rgba(34,26,20,.18);
+    --step:1.24;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#100D0B; --panel:#191411; --panel-2:#221B16;
+      --ink:#F2E8DA; --ink-soft:#AC9784; --ink-faint:#8A7767;
+      --line:#2E2621; --line-strong:#463A31;
+      --accent:#E8813A; --accent-soft:#F0A759; --cool:#5FA0A6;
+      --film:#070504;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 16px 34px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#100D0B; --panel:#191411; --panel-2:#221B16;
+    --ink:#F2E8DA; --ink-soft:#AC9784; --ink-faint:#8A7767;
+    --line:#2E2621; --line-strong:#463A31;
+    --accent:#E8813A; --accent-soft:#F0A759; --cool:#5FA0A6;
+    --film:#070504;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 16px 34px -14px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1140px; margin:0 auto; padding:clamp(28px,5vw,72px) clamp(18px,4vw,40px) 96px;
+        display:flex; flex-direction:column; gap:clamp(30px,4.4vw,54px)}
+
+  /* ---------- masthead ---------- */
+  .mast{display:flex; flex-direction:column; gap:14px}
+  .eyebrow{
+    font-family:'Spline Sans Mono',ui-monospace,monospace; font-size:12px; font-weight:600;
+    letter-spacing:.20em; text-transform:uppercase; color:var(--accent);
+    display:flex; align-items:center; gap:12px;
+  }
+  .eyebrow::after{content:""; flex:1; height:1px; background:var(--line); }
+  h1{
+    font-family:'Alfa Slab One',Georgia,serif; font-weight:400;
+    font-size:clamp(38px,6.4vw,74px); line-height:.98; letter-spacing:-.015em;
+    margin:0; text-wrap:balance;
+  }
+  h1 em{font-style:normal; color:var(--accent)}
+  .dek{margin:0; max-width:62ch; color:var(--ink-soft); font-size:clamp(16px,1.6vw,19px)}
+
+  /* ---------- player ---------- */
+  .player{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .stage{position:relative; background:var(--film); line-height:0}
+  canvas{display:block; width:100%; height:auto; aspect-ratio:16/9; touch-action:none}
+  .slate{
+    position:absolute; top:14px; left:16px; z-index:2;
+    font-family:'Spline Sans Mono',ui-monospace,monospace; font-size:11px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:#EFE6D8; opacity:.42;
+    pointer-events:none; mix-blend-mode:screen;
+  }
+  .bigplay{
+    position:absolute; inset:0; display:grid; place-items:center; z-index:3;
+    border:0; background:rgba(8,6,5,.34); cursor:pointer; padding:0;
+    opacity:0; pointer-events:none; transition:opacity .18s ease;
+  }
+  .bigplay[data-show="1"]{opacity:1; pointer-events:auto}
+  .bigplay span{
+    width:78px; height:78px; border-radius:50%; background:var(--accent);
+    display:grid; place-items:center; box-shadow:0 8px 26px rgba(0,0,0,.42);
+  }
+  .bigplay svg{margin-left:5px}
+
+  .transport{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    padding:14px 18px; border-top:1px solid var(--line); background:var(--panel-2);
+  }
+  button{font:inherit; color:inherit}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    border:1px solid var(--line-strong); background:transparent; color:var(--ink);
+    border-radius:3px; padding:8px 14px; font-size:14px; font-weight:600;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{background:var(--panel); border-color:var(--ink-faint)}
+  .btn-primary{background:var(--accent); border-color:var(--accent); color:#FFF6EC}
+  .btn-primary:hover{background:var(--accent-soft); border-color:var(--accent-soft)}
+  .btn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#FFF6EC}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  .tc{
+    font-family:'Spline Sans Mono',ui-monospace,monospace; font-size:13px; font-weight:600;
+    font-variant-numeric:tabular-nums; color:var(--ink-soft); white-space:nowrap;
+  }
+  .tc b{color:var(--ink); font-weight:600}
+
+  .scrub{flex:1 1 320px; min-width:220px; position:relative; height:34px; cursor:pointer; touch-action:none}
+  .track{position:absolute; top:15px; left:0; right:0; height:4px; background:var(--line); border-radius:2px}
+  .fill{position:absolute; top:15px; left:0; height:4px; background:var(--accent); border-radius:2px; width:0}
+  .head{position:absolute; top:9px; left:0; width:3px; height:16px; background:var(--ink); border-radius:1px; transform:translateX(-1px)}
+  .tick{
+    position:absolute; top:21px; width:9px; height:9px; margin-left:-4.5px; padding:0;
+    border:0; background:transparent; cursor:pointer;
+  }
+  .tick::before{
+    content:""; display:block; width:5px; height:5px; margin:2px; border-radius:50%;
+    background:var(--line-strong); transition:background .15s ease, transform .15s ease;
+  }
+  .tick:hover::before,.tick[data-on="1"]::before{background:var(--accent); transform:scale(1.5)}
+
+  /* ---------- beat sheet ---------- */
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:20px}
+  .section-head h2{
+    font-family:'Alfa Slab One',Georgia,serif; font-weight:400; font-size:22px;
+    letter-spacing:-.01em; margin:0;
+  }
+  .section-head p{margin:0; color:var(--ink-faint); font-size:14px}
+
+  .beats{list-style:none; margin:0; padding:0; display:grid; gap:1px; background:var(--line);
+         border:1px solid var(--line); border-radius:4px; overflow:hidden}
+  @media(min-width:760px){ .beats{grid-template-columns:repeat(3,1fr)} }
+  .beat{background:var(--panel); padding:16px 18px 18px; display:flex; flex-direction:column; gap:6px;
+        border:0; text-align:left; cursor:pointer; transition:background .15s ease}
+  .beat:hover{background:var(--panel-2)}
+  .beat[data-on="1"]{background:var(--panel-2); box-shadow:inset 3px 0 0 var(--accent)}
+  .beat .code{
+    font-family:'Spline Sans Mono',ui-monospace,monospace; font-size:11.5px; font-weight:600;
+    font-variant-numeric:tabular-nums; letter-spacing:.09em; color:var(--accent);
+    display:flex; gap:10px; align-items:center;
+  }
+  .beat .code i{font-style:normal; color:var(--ink-faint)}
+  .beat h3{margin:0; font-size:17px; font-weight:700; letter-spacing:-.01em}
+  .beat p{margin:0; font-size:14.5px; line-height:1.5; color:var(--ink-soft)}
+
+  /* ---------- specs ---------- */
+  .specs{list-style:none; margin:0; padding:0; display:grid; gap:22px 34px;
+         grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+         border-top:1px solid var(--line); padding-top:24px}
+  .specs dt{font-family:'Spline Sans Mono',ui-monospace,monospace; font-size:11px; font-weight:600;
+            letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:5px}
+  .specs dd{margin:0; font-size:16px; font-weight:600; font-variant-numeric:tabular-nums}
+  .specs dd small{display:block; font-weight:400; font-size:13.5px; color:var(--ink-soft); letter-spacing:0}
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Cold open &middot; 3.00 sec &middot; for Pete's Asia vlog</div>
+    <h1>Club to <em>Throttle</em></h1>
+    <p class="dek">Six beats, ninety frames. One caveman decides that dragging a lump of wood across the Pleistocene is no way to see Asia.</p>
+  </header>
+
+  <div class="player">
+    <div class="stage">
+      <div class="slate">Reel 01 &nbsp;/&nbsp; 1920&times;1080 &nbsp;/&nbsp; 30 fps</div>
+      <canvas id="film" width="1920" height="1080" aria-label="Animated intro: a caveman drags his club, spots a motorbike, throws the club away and rides off."></canvas>
+      <button class="bigplay" id="bigplay" aria-label="Play the intro">
+        <span><svg width="26" height="30" viewBox="0 0 26 30" fill="#FFF6EC" aria-hidden="true"><path d="M0 0l26 15L0 30z"/></svg></span>
+      </button>
+    </div>
+    <div class="transport">
+      <button class="btn btn-primary" id="play">Play</button>
+      <button class="btn" id="loop" aria-pressed="true">Loop</button>
+      <div class="tc"><b id="cur">0.00</b> / 3.00 s <span id="frm" style="color:var(--ink-faint)">&nbsp;&nbsp;f00</span></div>
+      <div class="scrub" id="scrub" role="slider" tabindex="0" aria-label="Scrub through the intro" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0">
+        <div class="track"></div><div class="fill" id="fill"></div><div class="head" id="head"></div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>Beat sheet</h2>
+      <p>Click a beat to jump to it.</p>
+    </div>
+    <ul class="beats" id="beats"></ul>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Delivery</h2><p>What comes out of the render.</p></div>
+    <dl class="specs">
+      <div><dt>Master</dt><dd>MP4 / H.264<small>1920&times;1080, 30 fps, yuv420p</small></dd></div>
+      <div><dt>Alt</dt><dd>WebM + GIF<small>VP9 and a loopable GIF</small></dd></div>
+      <div><dt>Duration</dt><dd>3.00 s<small>90 frames, frame-exact</small></dd></div>
+      <div><dt>Audio</dt><dd>None<small>Drop a sting under it in the edit</small></dd></div>
+      <div><dt>Source</dt><dd>Canvas 2D<small>Every frame a function of time</small></dd></div>
+    </dl>
+  </section>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   CLUB TO THROTTLE — 3.00s cold open, 1920x1080 @ 30fps
+   Every frame is a pure function of t. No RNG at draw time,
+   so the browser preview and the rendered master are identical.
+   ============================================================ */
+
+var W = 1920, H = 1080, FPS = 30, DUR = 3.0, GROUND = 838;
+var TAU = Math.PI * 2;
+
+/* ---- palette (cave paint) ---- */
+var INK   = "#251A12", OUT = 3.5;
+var SKIN  = "#E0A874", SKIN_D = "#C08355";
+var FUR   = "#7C5231", FUR_D = "#5E3C23";
+var HAIR  = "#2E2018";
+var WOOD  = "#A5713F", WOOD_D = "#7E5227";
+var BODY  = "#D93B22", BODY_D = "#A82A16";
+var CHROME= "#C9CDD4", METAL = "#4E5259", TIRE = "#1F1916";
+var DUST  = "#E8CB9C";
+
+/* ---- maths ---- */
+function clamp(v,a,b){ return v<a?a:v>b?b:v; }
+function lerp(a,b,u){ return a+(b-a)*u; }
+function seg(t,a,b){ return clamp((t-a)/(b-a),0,1); }
+function smooth(u){ return u*u*(3-2*u); }
+function easeOut(u){ return 1-Math.pow(1-u,3); }
+function easeIn(u){ return u*u*u; }
+function easeOutBack(u){ var c=2.2; return 1+(c+1)*Math.pow(u-1,3)+c*Math.pow(u-1,2); }
+function hash(i){ var s=Math.sin(i*127.1+311.7)*43758.5453; return s-Math.floor(s); }
+function px(p,a,l){ return { x:p.x+Math.sin(a)*l, y:p.y+Math.cos(a)*l }; }
+
+/* ---- draw helpers ---- */
+var c;                                   /* active context */
+function ink(fill,lw){ c.fillStyle=fill; c.fill(); c.lineJoin="round"; c.lineWidth=lw===undefined?OUT*2:lw; c.strokeStyle=INK; if(c.lineWidth>0) c.stroke(); }
+function disc(x,y,r,fill,lw){ c.beginPath(); c.arc(x,y,r,0,TAU); ink(fill,lw); }
+function plain(x,y,r,fill){ c.beginPath(); c.arc(x,y,r,0,TAU); c.fillStyle=fill; c.fill(); }
+function bones(list){
+  c.lineCap="round";
+  for(var i=0;i<list.length;i++){ var s=list[i]; c.beginPath(); c.moveTo(s[0].x,s[0].y); c.lineTo(s[1].x,s[1].y); c.strokeStyle=INK; c.lineWidth=s[2]+OUT*2; c.stroke(); }
+  for(var j=0;j<list.length;j++){ var q=list[j]; c.beginPath(); c.moveTo(q[0].x,q[0].y); c.lineTo(q[1].x,q[1].y); c.strokeStyle=q[3]; c.lineWidth=q[2]; c.stroke(); }
+}
+function shadowUnder(x,rx,alpha){
+  c.save(); c.globalAlpha=alpha===undefined?0.22:alpha; c.fillStyle="#6B4A28";
+  c.beginPath(); c.ellipse(x,GROUND+8,rx,rx*0.22,0,0,TAU); c.fill(); c.restore();
+}
+function puff(x,y,r,a,tint){
+  c.save(); c.globalAlpha=clamp(a,0,1); var f=tint||DUST;
+  plain(x,y,r,f); plain(x-r*0.7,y+r*0.22,r*0.66,f); plain(x+r*0.72,y+r*0.16,r*0.6,f); plain(x+r*0.1,y-r*0.6,r*0.55,f);
+  c.restore();
+}
+
+/* ============================ BACKGROUND ============================ */
+function sky(){
+  var g=c.createLinearGradient(0,0,0,GROUND);
+  g.addColorStop(0,"#4E9FB0"); g.addColorStop(0.45,"#8FC6C6"); g.addColorStop(0.78,"#F0CB93"); g.addColorStop(1,"#F7DDAE");
+  c.fillStyle=g; c.fillRect(0,0,W,GROUND+4);
+}
+function sun(cam){
+  var x=1440-cam*0.03, y=232;
+  var g=c.createRadialGradient(x,y,70,x,y,240);
+  g.addColorStop(0,"rgba(255,247,224,0.85)"); g.addColorStop(0.42,"rgba(255,240,196,0.30)");
+  g.addColorStop(1,"rgba(255,240,196,0)");
+  c.fillStyle=g; c.beginPath(); c.arc(x,y,240,0,TAU); c.fill();
+  plain(x,y,92,"#FFF7E0");
+}
+function volcano(cam){
+  var x=470-cam*0.10, base=GROUND+2;
+  c.beginPath(); c.moveTo(x-360,base); c.lineTo(x-86,base-386); c.lineTo(x+70,base-392); c.lineTo(x+372,base);
+  c.closePath(); ink("#6E8C99",0);
+  c.beginPath(); c.moveTo(x-86,base-386); c.lineTo(x+70,base-392); c.lineTo(x+372,base); c.lineTo(x+150,base);
+  c.closePath(); c.fillStyle="#5B7885"; c.fill();
+  /* crater glow + lava lick */
+  c.beginPath(); c.moveTo(x-84,base-384); c.lineTo(x-40,base-372); c.lineTo(x+6,base-386); c.lineTo(x+48,base-370); c.lineTo(x+70,base-390);
+  c.lineTo(x+70,base-360); c.lineTo(x-84,base-356); c.closePath(); c.fillStyle="#E2622C"; c.fill();
+  /* smoke */
+  for(var i=0;i<5;i++){ var h=hash(i*7); puff(x-14+i*26+h*30, base-410-i*72, 34+i*15, 0.30-i*0.04, "#DCE6E8"); }
+}
+function ridge(cam){
+  var off=cam*0.18, base=GROUND+4;
+  c.beginPath(); c.moveTo(-200,base);
+  for(var x=-200;x<=W+200;x+=40){
+    var w=x+off;
+    var y=base-118-Math.sin(w*0.0031)*58-Math.sin(w*0.0091+1.7)*26;
+    c.lineTo(x,y);
+  }
+  c.lineTo(W+200,base); c.closePath(); ink("#8FA88C",0);
+}
+function fern(x,scale,col){
+  c.save(); c.translate(x,GROUND+6); c.scale(scale,scale);
+  c.strokeStyle=col; c.lineCap="round"; c.lineWidth=13; c.beginPath(); c.moveTo(0,0); c.quadraticCurveTo(6,-92,-4,-152); c.stroke();
+  for(var i=0;i<7;i++){
+    var a=(i/6)*Math.PI*1.06-Math.PI*0.03, L=104-Math.abs(i-3)*13;
+    c.save(); c.translate(-4,-152); c.rotate(a-Math.PI/2);
+    c.beginPath(); c.moveTo(0,0); c.quadraticCurveTo(L*0.55,-30,L,-6); c.quadraticCurveTo(L*0.5,10,0,0); c.closePath();
+    c.fillStyle=col; c.fill(); c.restore();
+  }
+  c.restore();
+}
+function hills(cam){
+  var off=cam*0.36, base=GROUND+6;
+  c.beginPath(); c.moveTo(-200,base);
+  for(var x=-200;x<=W+200;x+=32){
+    var w=x+off;
+    var y=base-58-Math.sin(w*0.0052+0.6)*34-Math.sin(w*0.0143)*15;
+    c.lineTo(x,y);
+  }
+  c.lineTo(W+200,base); c.closePath(); ink("#B98046",0);
+  var sp=520, i0=Math.floor(off/sp)-2;
+  for(var i=i0;i<i0+9;i++){
+    var fx=i*sp+hash(i)*300-off;
+    if(fx<-260||fx>W+260) continue;
+    fern(fx,0.72+hash(i*3)*0.3,"#8E5F32");
+  }
+}
+function groundPlane(cam){
+  c.fillStyle="#C08B4C"; c.fillRect(0,GROUND,W,H-GROUND);
+  c.fillStyle="#D9A362"; c.fillRect(0,GROUND,W,26);
+  c.strokeStyle="#9C6C36"; c.lineWidth=4; c.beginPath(); c.moveTo(0,GROUND+26); c.lineTo(W,GROUND+26); c.stroke();
+  /* pebbles + tufts, world-locked */
+  var sp=190, i0=Math.floor(cam/sp)-2;
+  for(var i=i0;i<i0+16;i++){
+    var x=i*sp+hash(i)*150-cam, h1=hash(i*5), h2=hash(i*11);
+    if(x<-160||x>W+160) continue;
+    var y=GROUND+44+h1*168;
+    if(h2<0.5){
+      c.save(); c.globalAlpha=0.85; c.beginPath();
+      c.ellipse(x,y,12+h1*16,7+h1*8,0,0,TAU); c.fillStyle="#A87639"; c.fill(); c.restore();
+    } else {
+      c.strokeStyle="#9C6C36"; c.lineCap="round"; c.lineWidth=5;
+      for(var k=-1;k<=1;k++){ c.beginPath(); c.moveTo(x+k*11,y); c.quadraticCurveTo(x+k*17,y-16,x+k*24,y-26); c.stroke(); }
+    }
+  }
+}
+function backdrop(cam){ sky(); sun(cam); volcano(cam); ridge(cam); hills(cam); groundPlane(cam); }
+
+/* ============================ CAVEMAN ============================ */
+var D = { thigh:66, shin:66, torso:130, upper:56, fore:56, headR:52 };
+
+function rig(P){
+  var hip={x:P.x,y:P.y}, r={};
+  ["F","B"].forEach(function(k){
+    var h={x:hip.x+(k==="F"?9:-9),y:hip.y};
+    var knee=px(h,P["thigh"+k],D.thigh);
+    r["knee"+k]=knee; r["hip"+k]=h; r["foot"+k]=px(knee,P["shin"+k],D.shin);
+  });
+  var co=Math.cos(P.lean), si=Math.sin(P.lean);
+  function rot(dx,dy){ return { x:hip.x+dx*co-dy*si, y:hip.y+dx*si+dy*co }; }
+  r.hip=hip;
+  r.chest=rot(0,-72);
+  r.neck=rot(6,-D.torso);
+  r.shF=rot(12,-D.torso+10); r.shB=rot(-12,-D.torso+10);
+  r.elF=px(r.shF,P.armF[0],D.upper); r.hdF=px(r.elF,P.armF[1],D.fore);
+  r.elB=px(r.shB,P.armB[0],D.upper); r.hdB=px(r.elB,P.armB[1],D.fore);
+  r.headA=P.lean+P.tilt;
+  r.head=px(r.neck,Math.PI+r.headA,58);
+  r.rot=rot;
+  return r;
+}
+
+function foot(p,a){
+  c.save(); c.translate(p.x,p.y); c.rotate(a*0.34);
+  c.beginPath(); c.moveTo(-16,-12); c.quadraticCurveTo(-22,10,-8,13); c.lineTo(26,13);
+  c.quadraticCurveTo(38,10,32,-4); c.quadraticCurveTo(20,-16,-16,-12); c.closePath(); ink(SKIN);
+  c.restore();
+}
+
+function head(r,P){
+  c.save(); c.translate(r.head.x,r.head.y); c.rotate(r.headA);
+  var R=D.headR, d=P.dir;
+  /* hair mass behind */
+  c.beginPath(); c.moveTo(-d*14,-R-16); c.quadraticCurveTo(-d*76,-R-6,-d*72,18);
+  c.quadraticCurveTo(-d*68,54,-d*30,44); c.quadraticCurveTo(-d*54,10,-d*22,-R-4); c.closePath(); ink(HAIR);
+  /* skull */
+  disc(0,0,R,SKIN);
+  /* beard */
+  c.beginPath(); c.moveTo(-d*46,14); c.quadraticCurveTo(-d*52,58,-d*14,70);
+  c.lineTo(-d*2,56); c.lineTo(d*14,72); c.lineTo(d*26,56); c.lineTo(d*38,66);
+  c.quadraticCurveTo(d*50,42,d*44,18); c.quadraticCurveTo(d*8,40,-d*46,14); c.closePath(); ink(HAIR);
+  /* hair spikes on top */
+  c.beginPath(); c.moveTo(-d*46,-30); c.lineTo(-d*40,-66); c.lineTo(-d*20,-44);
+  c.lineTo(-d*6,-76); c.lineTo(d*12,-46); c.lineTo(d*28,-68); c.lineTo(d*34,-32); c.closePath(); ink(HAIR);
+  /* brow ridge */
+  c.strokeStyle=HAIR; c.lineCap="round"; c.lineWidth=19; c.beginPath();
+  c.moveTo(-d*30,-20-P.brow); c.quadraticCurveTo(d*12,-34-P.brow*1.4,d*48,-18-P.brow); c.stroke();
+  /* eyes */
+  var eo=clamp(P.eye,0.05,1.9);
+  [[d*6,8],[d*38,4]].forEach(function(e,i){
+    c.save(); c.translate(e[0],e[1]);
+    c.beginPath(); c.ellipse(0,0,13*Math.min(1,0.65+eo*0.4),16*eo,0,0,TAU); ink("#FFFDF5",OUT*1.4);
+    plain(d*3+P.look*5,1+P.look*2,6.4*Math.min(1.25,eo+0.25),INK);
+    c.restore();
+  });
+  /* nose */
+  c.beginPath(); c.moveTo(d*38,12); c.quadraticCurveTo(d*66,18,d*55,35); c.quadraticCurveTo(d*44,43,d*36,33); c.closePath(); ink(SKIN_D);
+  /* mouth */
+  var mo=P.mouth;
+  if(mo>0.04){
+    c.save(); c.translate(d*18,44);
+    c.beginPath(); c.ellipse(0,0,18+mo*10,4+mo*26,0,0,TAU); ink("#4C1F1C",OUT*1.4);
+    if(mo>0.5){ c.save(); c.globalAlpha=0.9; c.beginPath(); c.ellipse(0,mo*16,11,6+mo*5,0,0,TAU); c.fillStyle="#C2554E"; c.fill(); c.restore(); }
+    c.restore();
+  } else {
+    c.strokeStyle=INK; c.lineWidth=6; c.lineCap="round"; c.beginPath();
+    c.moveTo(d*4,46); c.quadraticCurveTo(d*20,52,d*34,42); c.stroke();
+  }
+  c.restore();
+}
+
+function caveman(P){
+  var r=rig(P);
+  if(P.shadow!==false) shadowUnder(P.x,74,0.2);
+  /* back limbs */
+  bones([[r.hipB,r.kneeB,30,SKIN_D],[r.kneeB,r.footB,26,SKIN_D]]);
+  foot(r.footB,P.shinB);
+  bones([[r.shB,r.elB,27,SKIN_D],[r.elB,r.hdB,24,SKIN_D]]);
+  disc(r.hdB.x,r.hdB.y,17,SKIN_D);
+  /* torso */
+  bones([[r.hip,r.chest,74,SKIN]]);
+  bones([[r.chest,r.neck,66,SKIN]]);
+  /* fur tunic */
+  var hem=[[40,-98],[52,2],[36,30],[22,0],[4,34],[-14,2],[-32,32],[-50,0],[-40,-98]];
+  var a=r.rot(-40,-98);
+  c.beginPath(); c.moveTo(a.x,a.y);
+  for(var hi=0;hi<hem.length;hi++){ var hp=r.rot(hem[hi][0],hem[hi][1]); c.lineTo(hp.x,hp.y); }
+  c.closePath(); ink(FUR);
+  [[-20,-52,9],[16,-30,7],[-6,-8,8]].forEach(function(s){ var p=r.rot(s[0],s[1]); plain(p.x,p.y,s[2],FUR_D); });
+  /* front limbs + head */
+  bones([[r.hipF,r.kneeF,32,SKIN],[r.kneeF,r.footF,28,SKIN]]);
+  foot(r.footF,P.shinF);
+  head(r,P);
+  bones([[r.shF,r.elF,29,SKIN],[r.elF,r.hdF,26,SKIN]]);
+  disc(r.hdF.x,r.hdF.y,18,SKIN);
+  return r;
+}
+
+/* ============================ CLUB ============================ */
+function club(x,y,a,s){
+  c.save(); c.translate(x,y); c.rotate(a); c.scale(s,s);
+  c.beginPath();
+  c.moveTo(-13,14); c.lineTo(-17,-92);
+  c.quadraticCurveTo(-32,-112,-48,-136);
+  c.quadraticCurveTo(-62,-170,-40,-196);
+  c.quadraticCurveTo(-18,-220,10,-214);
+  c.quadraticCurveTo(46,-206,54,-172);
+  c.quadraticCurveTo(60,-138,34,-122);
+  c.quadraticCurveTo(19,-110,17,-92);
+  c.lineTo(13,14); c.quadraticCurveTo(0,22,-13,14); c.closePath(); ink(WOOD);
+  c.save(); c.globalAlpha=0.8;
+  plain(-14,-168,13,WOOD_D); plain(24,-150,9,WOOD_D); plain(12,-196,8,WOOD_D); plain(-30,-136,7,WOOD_D);
+  c.restore();
+  c.strokeStyle=WOOD_D; c.lineWidth=4; c.lineCap="round";
+  c.beginPath(); c.moveTo(-7,0); c.lineTo(-10,-80); c.moveTo(6,-4); c.lineTo(8,-82); c.stroke();
+  c.restore();
+}
+
+/* ============================ MOTORBIKE ============================ */
+function wheel(x,y,spin){
+  disc(x,y,62,TIRE);
+  c.save(); c.translate(x,y); c.rotate(spin);
+  c.strokeStyle="#3A302A"; c.lineWidth=7; c.lineCap="butt";
+  for(var i=0;i<10;i++){ var a=i/10*TAU; c.beginPath(); c.moveTo(Math.cos(a)*50,Math.sin(a)*50); c.lineTo(Math.cos(a)*61,Math.sin(a)*61); c.stroke(); }
+  c.restore();
+  disc(x,y,40,"#DCDFE4",OUT*1.3);
+  c.save(); c.translate(x,y); c.rotate(spin);
+  c.strokeStyle="#9AA0A8"; c.lineWidth=5; c.lineCap="round";
+  for(var j=0;j<6;j++){ var b=j/6*Math.PI; c.beginPath(); c.moveTo(Math.cos(b)*37,Math.sin(b)*37); c.lineTo(-Math.cos(b)*37,-Math.sin(b)*37); c.stroke(); }
+  c.restore();
+  disc(x,y,13,"#83898F",OUT);
+}
+function bike(spin,sag){
+  /* local origin = ground contact under the REAR axle */
+  var fy=-62+sag;
+  wheel(204,fy,spin); wheel(0,fy,spin);
+  /* swingarm + forks */
+  bones([[{x:30,y:-142},{x:0,y:fy},18,METAL]]);
+  bones([[{x:184,y:-196},{x:204,y:fy},19,CHROME]]);
+  bones([[{x:166,y:-192},{x:188,y:fy+4},13,METAL]]);
+  disc(0,fy,23,CHROME,OUT);
+  /* front fender */
+  c.beginPath(); c.moveTo(160,-136); c.quadraticCurveTo(214,-166,268,-120);
+  c.quadraticCurveTo(216,-146,168,-118); c.closePath(); ink(BODY);
+  /* engine */
+  c.beginPath(); c.moveTo(76,-176); c.lineTo(150,-176); c.lineTo(158,-104); c.lineTo(70,-104); c.closePath(); ink(METAL);
+  c.strokeStyle="#767B82"; c.lineWidth=5;
+  for(var i=0;i<4;i++){ c.beginPath(); c.moveTo(80,-166+i*15); c.lineTo(152,-166+i*15); c.stroke(); }
+  /* exhaust */
+  bones([[{x:118,y:-118},{x:-6,y:-98},15,CHROME]]);
+  c.beginPath(); c.ellipse(-26,-96,30,17,-0.12,0,TAU); ink(CHROME);
+  /* main body: tail, seat pan, tank */
+  c.beginPath();
+  c.moveTo(-52,-200); c.lineTo(24,-214); c.lineTo(120,-214); c.lineTo(178,-190);
+  c.lineTo(196,-146); c.lineTo(150,-128); c.lineTo(58,-136); c.lineTo(6,-158); c.closePath(); ink(BODY);
+  c.save(); c.globalAlpha=0.55; c.beginPath();
+  c.moveTo(126,-208); c.lineTo(176,-188); c.lineTo(190,-152); c.lineTo(140,-136); c.closePath();
+  c.fillStyle=BODY_D; c.fill(); c.restore();
+  /* seat */
+  c.beginPath(); c.moveTo(-46,-206); c.lineTo(22,-226); c.lineTo(112,-226);
+  c.quadraticCurveTo(126,-224,124,-212); c.lineTo(20,-212); c.closePath(); ink("#2B2320");
+  /* rear guard */
+  c.beginPath(); c.moveTo(-46,-200); c.quadraticCurveTo(-86,-196,-96,-172);
+  c.quadraticCurveTo(-72,-184,-40,-186); c.closePath(); ink(BODY_D);
+  /* forks top, bars, light */
+  bones([[{x:184,y:-196},{x:196,y:-250},17,CHROME]]);
+  bones([[{x:160,y:-262},{x:236,y:-244},13,"#2B2320"]]);
+  disc(238,-243,11,"#43382F",OUT);
+  disc(232,-206,25,"#FFE9A6",OUT*1.4);
+  c.save(); c.globalAlpha=0.6; plain(226,-212,9,"#FFFAE6"); c.restore();
+  /* footpeg */
+  bones([[{x:92,y:-150},{x:58,y:-146},12,METAL]]);
+}
+
+/* ============================ FX ============================ */
+function speedLines(t,seed){
+  c.save(); c.lineCap="round";
+  for(var i=0;i<16;i++){
+    var h=hash(i+seed*13), h2=hash(i*3.3+seed);
+    var y=120+h*760, life=(t*2.6+h2)%1;
+    var x=W+120-life*(W+420), len=110+h2*230;
+    c.globalAlpha=(1-Math.abs(life-0.45)*1.7)*0.42;
+    c.strokeStyle= h<0.5? "#FFFFFF":"#F2D9A8"; c.lineWidth=4+h2*7;
+    c.beginPath(); c.moveTo(x,y); c.lineTo(x+len,y); c.stroke();
+  }
+  c.restore();
+}
+function shockBurst(x,y,u){
+  c.save(); c.translate(x,y); c.globalAlpha=(1-u)*0.95;
+  c.strokeStyle="#FFEFC0"; c.lineCap="round";
+  for(var i=0;i<7;i++){
+    var a=i/7*TAU+0.35, r0=74+u*54, r1=r0+26+Math.sin(i*2.1)*10;
+    c.lineWidth=12-u*7;
+    c.beginPath(); c.moveTo(Math.cos(a)*r0,Math.sin(a)*r0); c.lineTo(Math.cos(a)*r1,Math.sin(a)*r1); c.stroke();
+  }
+  c.restore();
+}
+function bang(x,y,s,rot){
+  c.save(); c.translate(x,y); c.rotate(rot); c.scale(s,s);
+  c.beginPath(); c.moveTo(-15,-80); c.lineTo(15,-80); c.lineTo(9,10); c.lineTo(-9,10); c.closePath(); ink("#FFD84A",OUT*1.6);
+  c.beginPath(); c.ellipse(0,38,14,14,0,0,TAU); ink("#FFD84A",OUT*1.6);
+  c.restore();
+}
+
+/* ============================ CHOREOGRAPHY ============================ */
+var K = { spot:0.95, thr:1.28, rel:1.44, jump:1.62, launch:1.70, land:2.00, roll:2.06 };
+var WALK_A=20, WALK_B=690, SKID_X=744, BIKE_X=1300, HIP_Y=GROUND-118, CAM_F=0.72;
+/* the action is drawn at 1:1 then scaled about the ground line, so everything stays planted */
+var ACT_S=1.18, ACT_X=1000;
+/* the bike is drawn a little larger than the rig it carries */
+var BS=1.12, SEAT_X=88, SEAT_Y=-281;
+
+var BEATS=[
+  {t:0.00, name:"Trudge",      note:"He drags the club in from stage left. Same walk he has done for forty thousand years."},
+  {t:0.95, name:"Double take", note:"Boots lock up. Eyes go wide. There is a motorbike parked in the Pleistocene."},
+  {t:1.28, name:"Club away",   note:"One wind-up and the club is gone over his shoulder, still spinning."},
+  {t:1.62, name:"The leap",    note:"Crouch, spring, and a full-frame arc onto the saddle."},
+  {t:2.00, name:"Touchdown",   note:"Lands hard enough to bottom the suspension out."},
+  {t:2.16, name:"Gone",        note:"Front wheel up, dust everywhere, out the right of frame."}
+];
+
+function ik(base, target, l1, l2, bend){
+  var dx=target.x-base.x, dy=target.y-base.y, d=Math.hypot(dx,dy);
+  d=Math.min(d,(l1+l2)*0.998); d=Math.max(d,Math.abs(l1-l2)+0.6);
+  var root=Math.atan2(dx,dy);
+  var A=Math.acos(clamp((d*d+l1*l1-l2*l2)/(2*d*l1),-1,1));
+  var a1=root+bend*A;
+  var knee={x:base.x+Math.sin(a1)*l1, y:base.y+Math.cos(a1)*l1};
+  return [a1, Math.atan2(target.x-knee.x, target.y-knee.y)];
+}
+function shoulderOf(x,y,lean,side){
+  var dx=side*12, dy=-D.torso+10;
+  return {x:x+dx*Math.cos(lean)-dy*Math.sin(lean), y:y+dx*Math.sin(lean)+dy*Math.cos(lean)};
+}
+function hipOf(x,y,side){ return {x:x+side*9, y:y}; }
+function plantLegs(P,fx,bx){
+  var f=ik(hipOf(P.x,P.y,1), {x:P.x+fx,y:GROUND-6}, D.thigh, D.shin, 1);
+  var b=ik(hipOf(P.x,P.y,-1),{x:P.x+bx,y:GROUND-6}, D.thigh, D.shin, 1);
+  P.thighF=f[0]; P.shinF=f[1]; P.thighB=b[0]; P.shinB=b[1];
+}
+
+function walkHipX(t){
+  if(t<=K.spot){ var u=seg(t,0,K.spot); return lerp(WALK_A,WALK_B,1-Math.pow(1-u,1.7)); }
+  return lerp(WALK_B,SKID_X,easeOut(seg(t,K.spot,K.thr)));
+}
+function rideDist(t){ var u=seg(t,K.roll,DUR); return 1900*(0.75*u*u+0.25*u); }
+function camAt(t){ return CAM_F*rideDist(t); }
+
+/* pose for every grounded / airborne phase (t < K.land) */
+function poseFor(t){
+  var P={ dir:1, x:walkHipX(t), y:HIP_Y, lean:0.10, tilt:-0.06, eye:0.95, brow:0, mouth:0.12, look:0 };
+
+  if(t < K.spot){                                   /* --- trudge --- */
+    var u=seg(t,0,K.spot), ph=u*TAU*3.4;
+    P.y = HIP_Y - 7*Math.abs(Math.cos(ph)) + 3;
+    P.thighF = 0.60*Math.sin(ph);
+    P.shinF  = P.thighF - (0.20+0.62*Math.max(0,Math.sin(ph+2.3)));
+    P.thighB = 0.60*Math.sin(ph+Math.PI);
+    P.shinB  = P.thighB - (0.20+0.62*Math.max(0,Math.sin(ph+Math.PI+2.3)));
+    P.lean   = 0.12+Math.sin(ph*2)*0.025;
+    P.armB   = [-0.55*Math.sin(ph)+0.18, -0.30*Math.sin(ph)+0.30];
+    P.armF   = [-0.98, -0.52];
+    P.look   = 0.2;
+
+  } else if(t < K.thr){                             /* --- double take --- */
+    var v=seg(t,K.spot,K.thr);
+    P.y = HIP_Y + 16*Math.sin(clamp(v*2.1,0,1)*Math.PI)*0.9 + 4;
+    plantLegs(P, 92, -66);
+    P.lean = v<0.35 ? lerp(0.12,-0.30,smooth(v/0.35)) : lerp(-0.30,-0.12,smooth((v-0.35)/0.65));
+    P.tilt = v<0.22 ? lerp(-0.06,-0.30,smooth(v/0.22))
+                    : (v<0.55 ? lerp(-0.30,0.16,smooth((v-0.22)/0.33)) : lerp(0.16,0.03,smooth((v-0.55)/0.45)));
+    P.eye  = v<0.28 ? lerp(0.95,1.85,easeOut(v/0.28)) : lerp(1.85,1.42,smooth((v-0.28)/0.72));
+    P.brow = 17*smooth(clamp(v*3.4,0,1));
+    P.mouth= v<0.3 ? lerp(0.12,0.98,easeOut(v/0.3)) : lerp(0.98,0.74,smooth((v-0.3)/0.7));
+    P.look = 1;
+    var fl=smooth(clamp(v*1.9,0,1));
+    P.armB = [lerp(0.18,1.40,fl), lerp(0.30,1.85,fl)];
+    P.armF = [lerp(-0.98,-1.45,smooth(v)), lerp(-0.52,-0.95,smooth(v))];
+
+  } else if(t < K.jump){                            /* --- the throw --- */
+    var w=seg(t,K.thr,K.rel), f=seg(t,K.rel,K.jump);
+    P.x = SKID_X + 12*smooth(f);
+    P.y = HIP_Y + 4 + 26*easeIn(seg(t,K.rel+0.06,K.jump));
+    plantLegs(P, 92-14*smooth(f), -66+10*smooth(f));
+    P.lean = w<1 ? lerp(-0.12,-0.26,smooth(w)) : lerp(-0.26,0.24,smooth(f));
+    P.tilt = lerp(0.03,0.10,smooth(w));
+    P.eye  = 1.38; P.brow=17; P.mouth=lerp(0.74,0.55,smooth(f)); P.look=1;
+    P.armF = [ lerp(-1.45,-2.55,smooth(w)) + 3.10*smooth(f), lerp(-0.95,-2.60,smooth(w)) + 2.95*smooth(f) ];
+    P.armB = [ lerp(1.40,-1.05,smooth(w)) + 1.75*smooth(f), lerp(1.85,-0.35,smooth(w)) + 0.95*smooth(f) ];
+
+  } else {                                          /* --- crouch + leap --- */
+    var cr=seg(t,K.jump,K.launch), u=seg(t,K.launch,K.land);
+    if(t < K.launch){
+      P.x = SKID_X+12; P.y = HIP_Y + 4 + lerp(26,42,smooth(cr));
+      plantLegs(P, 78, -56);
+      P.lean = lerp(0.24,0.40,smooth(cr));
+      P.armF = [lerp(0.55,-0.55,smooth(cr)), lerp(0.35,0.58,smooth(cr))];
+      P.armB = [lerp(-0.05,-0.75,smooth(cr)), lerp(0.60,0.42,smooth(cr))];
+    } else {
+      var arc=Math.sin(u*Math.PI);
+      P.x = lerp(SKID_X+12, BIKE_X+SEAT_X, u);
+      P.y = lerp(HIP_Y+46, GROUND+SEAT_Y, u) - 214*arc;
+      var tuck=Math.sin(u*Math.PI);
+      P.thighF = lerp(-0.30,0.95,tuck);  P.shinF = P.thighF - lerp(0.35,1.75,tuck);
+      P.thighB = lerp(-0.15,1.15,tuck);  P.shinB = P.thighB - lerp(0.30,1.55,tuck);
+      P.lean   = lerp(0.40,0.58,smooth(u));
+      var reach=smooth(clamp((u-0.35)/0.65,0,1));
+      P.armF=[lerp(-0.55,1.42,reach), lerp(0.58,1.12,reach)];
+      P.armB=[lerp(-0.75,1.20,reach), lerp(0.42,0.92,reach)];
+    }
+    P.eye=1.55; P.brow=18; P.mouth=1.0; P.look=1; P.tilt=0.06;
+  }
+  if(!P.armF) P.armF=[-0.5,-0.2];
+  if(!P.armB) P.armB=[0.2,0.3];
+  return P;
+}
+
+/* rider welded to the bike — drawn inside the bike's local frame */
+function riderPose(t){
+  var s=seg(t,K.land,K.land+0.16);
+  var P={ dir:1, x:SEAT_X, y:SEAT_Y+lerp(16,0,easeOut(s)), lean:lerp(0.88,0.68,easeOut(s)),
+          tilt:-0.12, eye:1.35, brow:16, mouth:lerp(1.0,0.62,s), look:1, shadow:false };
+  P.armF = ik(shoulderOf(P.x,P.y,P.lean, 1), {x:232,y:-284}, D.upper, D.fore, -1);
+  P.armB = ik(shoulderOf(P.x,P.y,P.lean,-1), {x:216,y:-278}, D.upper, D.fore, -1);
+  var f=ik(hipOf(P.x,P.y, 1), {x:106,y:-170}, D.thigh, D.shin, 1);
+  var b=ik(hipOf(P.x,P.y,-1), {x:90,y:-166}, D.thigh, D.shin, 1);
+  P.thighF=f[0]; P.shinF=f[1]; P.thighB=b[0]; P.shinB=b[1];
+  return P;
+}
+
+/* ---- particles ---- */
+function emit(t,t0,t1,rate,life,fn){
+  if(t<t0) return;
+  var n=Math.floor((Math.min(t,t1)-t0)*rate);
+  for(var i=0;i<=n;i++){
+    var bt=t0+i/rate, age=(t-bt)/life;
+    if(age<0||age>1) continue;
+    fn(bt,age,hash(i*2.7+t0*31),hash(i*5.9+t0*7));
+  }
+}
+function burst(t,t0,n,x,y,spread,life,sc){
+  var age=(t-t0)/life; if(age<0||age>1) return;
+  for(var i=0;i<n;i++){
+    var h=hash(i*4.1+t0*17), h2=hash(i*9.3+t0*5);
+    var a=Math.PI+(h-0.5)*Math.PI*1.7, sp=spread*(0.35+h2);
+    puff(x+Math.sin(a)*sp*age*1.5+(h-0.5)*34,
+         y+Math.cos(a)*sp*age*0.85+age*age*46,
+         (13+h2*26)*sc*(0.45+age), (1-age)*0.72);
+  }
+}
+
+/* ============================ FRAME ============================ */
+function renderFrame(ctx,t){
+  c=ctx; t=clamp(t,0,DUR);
+  var cam=camAt(t), d=rideDist(t);
+  c.setTransform(1,0,0,1,0,0);
+  c.clearRect(0,0,W,H);
+
+  var shake=0;
+  if(t>=K.land && t<K.land+0.16){ var su=seg(t,K.land,K.land+0.16); shake=Math.sin(t*180)*(1-su)*9; }
+  c.save(); c.translate(0,shake);
+
+  backdrop(cam);
+
+  c.save(); c.translate(ACT_X,GROUND); c.scale(ACT_S,ACT_S); c.translate(-ACT_X,-GROUND);
+
+  /* dust behind the action */
+  emit(t,0.06,K.spot,15,0.55,function(bt,age,h){
+    puff(walkHipX(bt)-168-age*52+(h-0.5)*20, GROUND-6-age*44, 9+age*30, (1-age)*0.5);
+  });
+  burst(t,K.spot+0.02,10,SKID_X-30,GROUND-8,120,0.5,1.0);
+  burst(t,K.launch,12,SKID_X-6,GROUND-10,150,0.55,1.15);
+  emit(t,K.roll+0.02,DUR,44,0.62,function(bt,age,h,h2){
+    var wx=BIKE_X+rideDist(bt)-cam;
+    puff(wx-40-age*130+(h-0.5)*40, GROUND-14-age*118*(0.4+h2), 16+age*66, (1-age)*0.6);
+  });
+
+  if(t<K.land){
+    /* ---- club: in hand, then in flight ---- */
+    var P=poseFor(t);
+    var r=caveman(P);
+    if(t<K.rel){
+      var h=r.hdF, dx=-152, dy=GROUND+2-h.y;
+      var dragA=Math.atan2(dx,-dy)+Math.sin(t*23)*0.03;
+      var a = t<K.thr ? dragA : lerp(dragA,5.58,smooth(seg(t,K.thr,K.rel)));
+      club(h.x,h.y,a,clamp(Math.hypot(dx,dy)/208,0.9,1.06));
+    } else {
+      var s=t-K.rel, R=rig(poseFor(K.rel)).hdF;
+      club(R.x-1010*s-cam, R.y-1290*s+960*s*s, 5.58-15.5*s, 1);
+    }
+    /* the bike, waiting */
+    shadowUnder(BIKE_X-cam+128,168,0.2);
+    c.save(); c.translate(BIKE_X-cam,GROUND); c.scale(BS,BS); bike(0,0); c.restore();
+    /* shock pop on the double take */
+    if(t>=K.spot+0.04 && t<K.spot+0.30) shockBurst(r.head.x,r.head.y,seg(t,K.spot+0.04,K.spot+0.30));
+    if(t>=K.spot+0.08 && t<K.jump){
+      var bu=seg(t,K.spot+0.08,K.spot+0.30);
+      bang(r.head.x+104, r.head.y-136, easeOutBack(bu)*1.06, 0.22+Math.sin(t*15)*0.05);
+    }
+  } else {
+    /* ---- mounted: rider welded into the bike frame ---- */
+    var bx=BIKE_X+d-cam;
+    var sag=15*Math.exp(-(t-K.land)*13)*Math.cos((t-K.land)*46);
+    var wu=seg(t,K.land+0.08,2.62);
+    var wheelie=-0.34*Math.sin(wu*Math.PI);
+    var spin=d/62+Math.min(t-K.land,0.22)*44;
+    burst(t,K.land,14,bx+128,GROUND-12,170,0.6,1.25);
+    if(bx<W+560){
+      shadowUnder(bx+128,168-Math.abs(wheelie)*130,0.18);
+      c.save(); c.translate(bx,GROUND); c.rotate(wheelie);
+      c.save(); c.scale(BS,BS); bike(spin,sag); c.restore();
+      caveman(riderPose(t)); c.restore();
+    }
+  }
+  c.restore();
+
+  if(t>K.roll+0.06) speedLines(t,3);
+  c.restore();
+}
+
+/* ============================ PLAYER ============================ */
+var cv=document.getElementById("film"), ctx=cv.getContext("2d");
+var elPlay=document.getElementById("play"), elLoop=document.getElementById("loop"),
+    elCur=document.getElementById("cur"), elFrm=document.getElementById("frm"),
+    elFill=document.getElementById("fill"), elHead=document.getElementById("head"),
+    elScrub=document.getElementById("scrub"), elBig=document.getElementById("bigplay"),
+    elBeats=document.getElementById("beats");
+
+var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var playing=false, loopOn=true, tNow=0, last=0, raf=0;
+
+BEATS.forEach(function(b,i){
+  var li=document.createElement("li");
+  var btn=document.createElement("button");
+  btn.className="beat"; btn.dataset.i=i;
+  btn.innerHTML='<span class="code">'+String(i+1).padStart(2,"0")+' <i>'+b.t.toFixed(2)+'s</i></span>'+
+                '<h3>'+b.name+'</h3><p>'+b.note+'</p>';
+  btn.addEventListener("click",function(){ pause(); setT(b.t+0.001); });
+  li.appendChild(btn); elBeats.appendChild(li);
+
+  var tick=document.createElement("button");
+  tick.className="tick"; tick.style.left=(b.t/DUR*100)+"%";
+  tick.title=b.name+" — "+b.t.toFixed(2)+"s";
+  tick.setAttribute("aria-label","Jump to "+b.name);
+  tick.addEventListener("click",function(e){ e.stopPropagation(); pause(); setT(b.t+0.001); });
+  elScrub.appendChild(tick);
+});
+var beatBtns=[].slice.call(elBeats.querySelectorAll(".beat"));
+var tickBtns=[].slice.call(elScrub.querySelectorAll(".tick"));
+
+function activeBeat(t){ var k=0; for(var i=0;i<BEATS.length;i++){ if(t>=BEATS[i].t) k=i; } return k; }
+function ui(){
+  var pct=tNow/DUR*100;
+  elFill.style.width=pct+"%"; elHead.style.left=pct+"%";
+  elCur.textContent=tNow.toFixed(2);
+  elFrm.innerHTML="&nbsp;&nbsp;f"+String(Math.min(Math.round(tNow*FPS),FPS*DUR)).padStart(2,"0");
+  elScrub.setAttribute("aria-valuenow",tNow.toFixed(2));
+  var k=activeBeat(tNow);
+  beatBtns.forEach(function(b,i){ b.dataset.on=(i===k)?"1":"0"; });
+  tickBtns.forEach(function(b,i){ b.dataset.on=(i===k)?"1":"0"; });
+}
+function setT(t){ tNow=clamp(t,0,DUR); renderFrame(ctx,tNow); ui(); }
+function tick(now){
+  if(!playing) return;
+  var dt=(now-last)/1000; last=now;
+  tNow+=Math.min(dt,0.1);
+  if(tNow>=DUR){ if(loopOn){ tNow=tNow%DUR; } else { tNow=DUR; pause(); ui(); return; } }
+  renderFrame(ctx,tNow); ui(); raf=requestAnimationFrame(tick);
+}
+function play(){ if(playing) return; if(tNow>=DUR-0.001) tNow=0; playing=true; elPlay.textContent="Pause";
+  elBig.dataset.show="0"; last=performance.now(); raf=requestAnimationFrame(tick); }
+function pause(){ playing=false; cancelAnimationFrame(raf); elPlay.textContent="Play"; elBig.dataset.show="1"; }
+function toggle(){ playing?pause():play(); }
+
+elPlay.addEventListener("click",toggle);
+elBig.addEventListener("click",toggle);
+elLoop.addEventListener("click",function(){ loopOn=!loopOn; elLoop.setAttribute("aria-pressed",String(loopOn)); });
+
+function scrubTo(e){
+  var r=elScrub.getBoundingClientRect();
+  setT(((e.clientX-r.left)/r.width)*DUR);
+}
+var dragging=false;
+elScrub.addEventListener("pointerdown",function(e){ if(e.target.classList.contains("tick")) return;
+  dragging=true; pause(); elScrub.setPointerCapture(e.pointerId); scrubTo(e); });
+elScrub.addEventListener("pointermove",function(e){ if(dragging) scrubTo(e); });
+elScrub.addEventListener("pointerup",function(){ dragging=false; });
+elScrub.addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){ e.preventDefault(); pause(); setT(tNow+(e.key==="ArrowRight"?1:-1)/FPS); }
+});
+document.addEventListener("keydown",function(e){
+  if(e.code==="Space"&&e.target===document.body){ e.preventDefault(); toggle(); }
+});
+
+/* renderer hook — used by render.mjs to pull frame-exact stills */
+window.__renderAt=function(t){ pause(); renderFrame(ctx,t); };
+window.__FILM={W:W,H:H,FPS:FPS,DUR:DUR};
+
+setT(0);
+if(reduced){ elBig.dataset.show="1"; }
+else if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(play); } else { play(); }
+
+})();
+</script>
