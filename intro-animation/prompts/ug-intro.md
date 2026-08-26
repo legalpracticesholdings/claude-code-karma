@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v9 (club drag + beard fix)
+**Version:** v10 (pulled back further)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,7 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v10** — **pulled back further** on request. Framing is now specified as proportions of the frame rather than adjectives: "wider" is not actionable, "Ug occupies about a third of the frame height" is. The face-legibility clause was fighting the pull-back and has been dropped.
 - **v9** — **club now pinned as a DRAG.** Renders had him ploughing it forward like a snowplough. Same failure class as the scooter: "behind him" is ambiguous unless the model already knows which way he faces. Fixed with the same four-anchor treatment plus a clean-ground negative.
 - **v9** — **beard corrected to stubble.** This was an error in the prompt, not the model: the character block said "full grey beard and moustache" when the approved reference is close-cropped grey stubble with skin showing through. The model rendered what it was asked for.
 - **v8** — **wider frame, staged in depth.** Ug starts near camera at the far left, the scooter sits smaller and further up the track, with a long visible run of dirt between them. Pulling back flat would shrink Pete's face, which is the whole point of this version, so the distance is bought with perspective instead of zoom.
@@ -53,13 +54,16 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 > **DO NOT put the club head, the furrow or the dust in FRONT of him or to his RIGHT. The ground
 > ahead of him, between him and the scooter, is clean undisturbed dirt.**
 >
-> **COMPOSITION — wide, staged in depth.** A wide cinematic side-on establishing shot, 16:9, camera
-> pulled well back and low. **Ug is at the FAR LEFT of frame and nearest to camera**, full body,
-> mid-stride, walking toward the RIGHT along the track, dragging the club so its knobbly end carves
-> a furrow and kicks up dust. He is large enough that his face reads clearly.
-> **The scooter is further away, up the track to the RIGHT**, smaller in frame through perspective.
-> **Leave a long, open, empty run of dirt track between them** — the ground he still has to cover.
-> Both Ug and the scooter are fully inside the frame with air around them; nothing is cropped.
+> **COMPOSITION — EXTREME WIDE, staged in depth.** A very wide cinematic side-on establishing
+> shot, 16:9, camera a long way back. Two small figures in a big landscape.
+> **Ug's whole standing body occupies only about ONE THIRD of the frame height.** He is at the FAR
+> LEFT, nearest to camera, full body, mid-stride, walking toward the RIGHT along the track.
+> **The scooter sits far up the track to the RIGHT**, small in frame through perspective.
+> **A very large expanse of empty dirt track separates them — roughly a third of the frame's
+> width** — the ground he still has to cover.
+> Generous open sky across the upper third, and the paddies and karsts spread wide around them.
+> Both Ug and the scooter are fully inside the frame with a lot of air around them; nothing is
+> cropped at the edges.
 >
 > **THE MACHINE — a modern Asian scooter, NOT a dirt bike and NOT a trail bike.** In the RIGHT
 > third of frame, drawn from the second reference photo: a glossy black step-through maxi-scooter
