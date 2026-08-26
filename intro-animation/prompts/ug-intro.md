@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v4 (working — not yet generated)
+**Version:** v5 (working — not yet generated)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,8 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v5** — one or two farmers now **glance up as Ug tears past**, tracked by the swing of their conical hat brims. Deliberately written as fleeting and background-scale: at this length a staged reaction would eat the gag rather than add to it.
+- **v5** — the scooter now sounds like a **thunderous V8**, not a scooter. Same joke as the wheelie, in the audio track.
 - **v4** — the **vaulting mount and the wheelie exit are both restored**, and deliberately played as absurd rather than corrected for realism. A commuter scooter is the funnier machine to do these on, not the reason to drop them.
 
 ---
@@ -71,10 +73,19 @@ Start image: the keyframe above.
 > dust and exiting the frame.
 >
 > Play the vault and the wheelie big and cartoonish — this tiny commuter scooter absolutely should
-> not be able to do either, and that is the joke. Engine screaming flat out.
+> not be able to do either, and that is the joke.
 >
-> Behind him the rice paddies and the farmers in conical hats stay busy throughout — bending,
-> planting, the water rippling — an ordinary working day going on regardless.
+> **SOUND: the scooter must roar like a huge American V8 muscle car** — a deep, thunderous,
+> guttural big-block bellow, throttle blipping and then howling flat out as he tears away.
+> Absolutely NOT a scooter sound: no small-engine buzz, no moped whine, no 125cc rasp. The engine
+> note should be comically, impossibly oversized for the machine making it.
+>
+> Behind him the rice paddies and the farmers in conical hats work on throughout — bending,
+> planting, the water rippling. As Ug tears past, **one or two of the nearest farmers straighten up
+> and turn to follow him**, the wide brims of their conical hats swinging round to track him.
+> Keep this fleeting — a brief background glance caught in passing, never a staged reaction, never
+> a pause in their work. They stay small and soft in the depth of field, the camera never cuts to
+> them, and Ug remains the focus of the shot throughout.
 >
 > Camera pans right to follow him. Hand-drawn cartoon animation, bold ink outlines, flat cel
 > shading. No text, no captions, no subtitles, no watermark.
@@ -82,10 +93,7 @@ Start image: the keyframe above.
 ---
 
 ## Open items
-1. **Do the farmers notice Ug?** Right now they work on obliviously, which is its own joke. One or
-   two straightening up to stare as a caveman buzzes past on a scooter is the bigger laugh — but it
-   is an added beat, so it is yours to call.
-2. Scooter **colour**: matching the black reference, or something that pops? Black against dark
+1. Scooter **colour**: matching the black reference, or something that pops? Black against dark
    water and green rice is now a weaker read than it was against bare ochre.
-3. **Is Ug still a caveman here?** Paddies and modern farmers make him the only prehistoric thing in
+2. **Is Ug still a caveman here?** Paddies and modern farmers make him the only prehistoric thing in
    frame. That is probably the gag — worth confirming it is deliberate.
