@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v8 (wider frame, continuity pass)
+**Version:** v9 (club drag + beard fix)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,8 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v9** — **club now pinned as a DRAG.** Renders had him ploughing it forward like a snowplough. Same failure class as the scooter: "behind him" is ambiguous unless the model already knows which way he faces. Fixed with the same four-anchor treatment plus a clean-ground negative.
+- **v9** — **beard corrected to stubble.** This was an error in the prompt, not the model: the character block said "full grey beard and moustache" when the approved reference is close-cropped grey stubble with skin showing through. The model rendered what it was asked for.
 - **v8** — **wider frame, staged in depth.** Ug starts near camera at the far left, the scooter sits smaller and further up the track, with a long visible run of dirt between them. Pulling back flat would shrink Pete's face, which is the whole point of this version, so the distance is bought with perspective instead of zoom.
 - **v8** — **camera locked off.** The whole gag plays inside one static wide frame. Camera moves are where AI video loses object permanence: whatever leaves frame can come back deformed. Keeping Ug and the scooter both visible throughout gives the model continuous reference and lets the six beats actually chain.
 - **v8** — beats **explicitly numbered** in the film prompt, so the sequence is an ordered list rather than a paragraph a model can reorder.
@@ -34,9 +36,22 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 >
 > **CHARACTER — Ug.** The bald caveman from the first reference, identical likeness: completely
 > bald sun-tanned dome, heavy dark bushy eyebrows, deep-set eyes, full grey beard and moustache,
-> weathered creased face, thickset barrel-chested build. Yellow-orange leopard-spotted fur tunic
-> over one shoulder, bare hairy arms and legs, big bare feet. He hauls an enormous knobbly
+> weathered creased face, thickset barrel-chested build. **His beard is CLOSE-CROPPED GREY STUBBLE
+> — short silver-grey stubble hugging the jawline, chin and upper lip with skin showing through it,
+> exactly as in the reference. NOT a long, full or bushy beard.** Yellow-orange leopard-spotted fur
+> tunic over one shoulder, bare hairy arms and legs, big bare feet. He hauls an enormous knobbly
 > dark-brown wooden club.
+>
+> **CRITICAL — HOW HE CARRIES THE CLUB.** He DRAGS it along behind him. He is NOT pushing it and
+> NOT carrying it in front of him. Pinned four ways:
+> **(1)** He grips the club's THIN HANDLE END low, down beside his hip.
+> **(2)** The heavy knobbly HEAD of the club is BEHIND him, trailing along the ground to the LEFT,
+> back down the track he has already walked.
+> **(3)** The club angles DOWN and BACKWARD to the LEFT, away from his direction of travel.
+> **(4)** The gouged furrow and the puffs of dust are BEHIND him on the LEFT, marking where he came
+> from.
+> **DO NOT put the club head, the furrow or the dust in FRONT of him or to his RIGHT. The ground
+> ahead of him, between him and the scooter, is clean undisturbed dirt.**
 >
 > **COMPOSITION — wide, staged in depth.** A wide cinematic side-on establishing shot, 16:9, camera
 > pulled well back and low. **Ug is at the FAR LEFT of frame and nearest to camera**, full body,
@@ -90,7 +105,8 @@ Start image: the keyframe above.
 > right as he goes.
 >
 > **The beats, in this exact order:**
-> **1.** Ug trudges from the far left toward the scooter, dragging his heavy club, kicking up dust.
+> **1.** Ug trudges from the far left toward the scooter, the club's heavy head DRAGGING along the
+> ground behind him to the left, gouging a furrow and kicking up dust in his wake.
 > **2.** He stops dead and jolts upright, eyes wide — he has spotted it.
 > **3.** He flings the club away behind him to the LEFT; it spins off out of frame.
 > **4.** He charges the last stretch of track and **VAULTS clean over the scooter in one bound,
