@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v10 (pulled back further)
+**Version:** v11 (travel direction dominant, taller Ug)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,8 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v11** — **travel direction made the dominant constraint.** v10's four absolute left/right club anchors competed with his walking direction, and the model resolved the conflict by flipping him round to walk away from the scooter. The club is now defined RELATIVE to his travel ("behind him, on the side away from the scooter") rather than by frame-absolute direction, with facing pinned first and hardest. Stacking independent absolute directions lets a model trade one against another; deriving them from one primary fact does not.
+- **v11** — **Ug back to the taller build** of the earlier renders. Less literal to the reference, preferred on screen.
 - **v10** — **pulled back further** on request. Framing is now specified as proportions of the frame rather than adjectives: "wider" is not actionable, "Ug occupies about a third of the frame height" is. The face-legibility clause was fighting the pull-back and has been dropped.
 - **v9** — **club now pinned as a DRAG.** Renders had him ploughing it forward like a snowplough. Same failure class as the scooter: "behind him" is ambiguous unless the model already knows which way he faces. Fixed with the same four-anchor treatment plus a clean-ground negative.
 - **v9** — **beard corrected to stubble.** This was an error in the prompt, not the model: the character block said "full grey beard and moustache" when the approved reference is close-cropped grey stubble with skin showing through. The model rendered what it was asked for.
@@ -35,24 +37,27 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 > Cartoon illustration in EXACTLY the art style of the first reference: bold varied-weight ink
 > outlines, flat cel shading with cross-hatch texture accents, saturated comic-book palette.
 >
-> **CHARACTER — Ug.** The bald caveman from the first reference, identical likeness: completely
-> bald sun-tanned dome, heavy dark bushy eyebrows, deep-set eyes, full grey beard and moustache,
-> weathered creased face, thickset barrel-chested build. **His beard is CLOSE-CROPPED GREY STUBBLE
+> **DIRECTION OF TRAVEL — THE MOST IMPORTANT FACT IN THIS IMAGE.** Ug is walking RIGHTWARD, TOWARD
+> the scooter, closing the distance to it. His head, face, chest, knees and toes ALL point RIGHT.
+> The scooter is AHEAD of him, up the track. **He is NOT walking away from it. He is NOT facing
+> left. His back is NOT turned to the scooter.** Everything else follows from this.
+>
+> **CHARACTER — Ug.** The bald caveman from the first reference: completely
+> bald sun-tanned dome, heavy dark bushy eyebrows, deep-set eyes,
+> weathered creased face. **BUILD: tall and rangy, long legs, upright stance — a big man, not a
+> small one. NOT squat, NOT dwarfish, NOT short-legged, NOT a large head on a little body.**
+> **His beard is CLOSE-CROPPED GREY STUBBLE
 > — short silver-grey stubble hugging the jawline, chin and upper lip with skin showing through it,
 > exactly as in the reference. NOT a long, full or bushy beard.** Yellow-orange leopard-spotted fur
 > tunic over one shoulder, bare hairy arms and legs, big bare feet. He hauls an enormous knobbly
 > dark-brown wooden club.
 >
-> **CRITICAL — HOW HE CARRIES THE CLUB.** He DRAGS it along behind him. He is NOT pushing it and
-> NOT carrying it in front of him. Pinned four ways:
-> **(1)** He grips the club's THIN HANDLE END low, down beside his hip.
-> **(2)** The heavy knobbly HEAD of the club is BEHIND him, trailing along the ground to the LEFT,
-> back down the track he has already walked.
-> **(3)** The club angles DOWN and BACKWARD to the LEFT, away from his direction of travel.
-> **(4)** The gouged furrow and the puffs of dust are BEHIND him on the LEFT, marking where he came
-> from.
-> **DO NOT put the club head, the furrow or the dust in FRONT of him or to his RIGHT. The ground
-> ahead of him, between him and the scooter, is clean undisturbed dirt.**
+> **THE CLUB — defined relative to his travel, not to the frame.** He grips the club's thin handle
+> end low beside his hip, and its heavy knobbly head TRAILS ALONG THE GROUND BEHIND HIM — behind
+> meaning *on the side away from the scooter*, back down the stretch of track he has already
+> covered. It gouges a furrow and kicks up dust in his wake. He is not pushing it, not swinging it,
+> not carrying it ahead of himself. **The ground between him and the scooter is clean, undisturbed
+> dirt — no furrow, no dust, nothing dragged across it.**
 >
 > **COMPOSITION — EXTREME WIDE, staged in depth.** A very wide cinematic side-on establishing
 > shot, 16:9, camera a long way back. Two small figures in a big landscape.
