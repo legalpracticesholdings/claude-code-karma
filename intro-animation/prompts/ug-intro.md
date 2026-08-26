@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v6 (locked — ready to generate)
+**Version:** v7 (orientation fix after first render)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,7 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v7** — **orientation rewritten.** The first render put the scooter facing Ug despite a capitalised instruction. Single left/right statements are unreliable in image models, so the direction is now pinned by four redundant anchors: which end is nearest Ug, which named parts sit at which end, which flank we view, and two explicit negatives.
 - **v6** — paddies are **lush green growing rice, not flooded mirror water**. Aesthetics aside, the deciding factor is technical: rippling water and reflections are where AI video artefacts live, and that render budget is better spent on Ug than on background nobody is watching.
 - **v6** — scooter **locked black** with chrome and pale detail. It keeps the machine mundane, which is what the wheelie and the V8 play against, and a dark silhouette separates cleanly from mid-green.
 - **v5** — one or two farmers now **glance up as Ug tears past**, tracked by the swing of their conical hat brims. Deliberately written as fleeting and background-scale: at this length a staged reaction would eat the gag rather than add to it.
@@ -44,9 +45,16 @@ References: **1)** approved Ug caricature (character + art style) · **2)** blac
 > long black bench seat with a pale grey top, smooth flowing panels, silver alloy wheels with a
 > front disc brake, a chrome exhaust, side stand down. Keep bright chrome and pale highlights on it
 > so the dark silhouette still reads as a machine and not a flat black blob.
-> **CRITICAL ORIENTATION: the scooter faces SCREEN RIGHT** — front wheel, windscreen and
-> handlebars at the RIGHT-hand end, tail and exhaust at the LEFT-hand end — pointing the same
-> direction Ug is walking. Perfectly ordinary, modern, and completely out of place here.
+> **CRITICAL — WHICH WAY THE SCOOTER POINTS.** It is parked pointing AWAY from Ug, aimed up the
+> track toward the RIGHT of frame: the same direction Ug is walking, and the direction he will
+> ride off in. Pinned four ways, all of which must hold:
+> **(1)** Its REAR END is the end NEAREST Ug. **(2)** The red tail-light, rear number plate and rear
+> wheel are therefore on the LEFT-hand side of the scooter as we see it, while the front wheel,
+> forks, headlight, tall windscreen and handlebars are on the RIGHT-hand side as we see it.
+> **(3)** We are looking at the scooter's LEFT-HAND FLANK. **(4)** If Ug sat on it now he would be
+> facing RIGHT, ready to ride away to the right.
+> **DO NOT draw the scooter facing Ug. DO NOT put the windscreen, headlight or handlebars on the
+> left-hand side.** Perfectly ordinary, modern, and completely out of place here.
 >
 > **SETTING — rural Vietnam.** Ug walks along a dry ochre dirt track on a raised earth bund.
 > Immediately behind him, filling the middle of the frame, are **lush green rice paddies in full
