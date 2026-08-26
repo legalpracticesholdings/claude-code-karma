@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v3 (working — not yet generated)
+**Version:** v4 (working — not yet generated)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -12,6 +12,7 @@
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
 - **v3** — *(assumed, say the word and it reverts)* the **volcano is replaced by limestone karst peaks**. Every rice-field reference shows karsts, and they are the Vietnam signature; a volcano next to a paddy reads prehistoric, which now fights the joke instead of feeding it.
+- **v4** — the **vaulting mount and the wheelie exit are both restored**, and deliberately played as absurd rather than corrected for realism. A commuter scooter is the funnier machine to do these on, not the reason to drop them.
 
 ---
 
@@ -64,9 +65,13 @@ Start image: the keyframe above.
 >
 > Action, fast and snappy with comedic timing: Ug trudges to the right dragging his heavy club
 > through the dust — he stops dead and jolts with surprise, eyes wide, when he clocks the scooter
-> — he flings the club away back over his shoulder to the left, swings a leg over the scooter and
-> settles onto the seat, and buzzes away to the RIGHT in a billowing cloud of ochre dust, exiting
-> the frame.
+> — he flings the club away back over his shoulder to the left, **VAULTS clean over the scooter in
+> one bound and lands astride the seat**, and the little scooter rockets away to the RIGHT with its
+> **front wheel snapping up into an improbable wheelie**, tearing off in a billowing cloud of ochre
+> dust and exiting the frame.
+>
+> Play the vault and the wheelie big and cartoonish — this tiny commuter scooter absolutely should
+> not be able to do either, and that is the joke. Engine screaming flat out.
 >
 > Behind him the rice paddies and the farmers in conical hats stay busy throughout — bending,
 > planting, the water rippling — an ordinary working day going on regardless.
@@ -80,9 +85,7 @@ Start image: the keyframe above.
 1. **Do the farmers notice Ug?** Right now they work on obliviously, which is its own joke. One or
    two straightening up to stare as a caveman buzzes past on a scooter is the bigger laugh — but it
    is an added beat, so it is yours to call.
-2. A scooter is not a dirt bike — a **wheelie is out of character**. Currently replaced with a
-   flat buzz-off. Restore a comic pop (front wheel hop / bogged-down whine) if wanted.
-3. Scooter **colour**: matching the black reference, or something that pops? Black against dark
+2. Scooter **colour**: matching the black reference, or something that pops? Black against dark
    water and green rice is now a weaker read than it was against bare ochre.
-4. **Is Ug still a caveman here?** Paddies and modern farmers make him the only prehistoric thing in
+3. **Is Ug still a caveman here?** Paddies and modern farmers make him the only prehistoric thing in
    frame. That is probably the gag — worth confirming it is deliberate.
