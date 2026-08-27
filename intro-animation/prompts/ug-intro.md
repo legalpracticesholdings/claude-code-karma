@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v12 (character locked to the approved cartoon)
+**Version:** v13 (proven constraints restored, prompt is numbered so nothing gets cut again)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -8,6 +8,19 @@
 - 3 seconds, 16:9, cold open, cuts on action.
 
 ## Changelog
+- **v13** — **the doc is now the prompt.** Prompt A is sent verbatim, numbered section by section.
+  Every regression so far — the beard, the pushed club, the giant, and twice the scooter facing the
+  wrong way — came from re-typing a shortened prompt into the API call and dropping a clause that
+  was already working. Fixing the newest bug kept knocking out an older fix. Numbered sections make
+  an omission visible.
+- **v13** — **four-anchor scooter orientation restored.** v12 compressed it to a single sentence
+  and the scooter immediately turned to face Ug again, exactly as it did before v7. Single left/right
+  statements are unreliable in image models; the four redundant anchors are not, so they stay.
+- **v13** — **scale pinned to the farmers, not the frame.** v10 specified Ug as a fraction of frame
+  height and the model satisfied it by shrinking the landscape, making him a giant. Relative measures
+  survive a change of framing; absolute ones fight it.
+- **v13** — **pulled back further again**, and framing now states the whole scene must fit with
+  margin on all four sides rather than giving a target size for Ug.
 - **v2** — trail bike replaced with a black Asian maxi-scooter (Honda PCX type).
 - **v2** — scooter turned to face **screen right**, same direction Ug walks, so he rides off the way he was already heading.
 - **v3** — the near background is now **Vietnamese rice paddies with farmers in conical nón lá hats**, bent over planting in flooded, mirror-flat fields.
@@ -32,78 +45,65 @@
 
 ## Prompt A — establishing keyframe (image)
 
-References: **1)** approved Ug caricature (character + art style) · **2)** black scooter photo (machine)
-· **3)** rice-paddy photos (setting, hats, working postures)
+References: the **Ug Reference Element** (character + likeness, embedded in the prompt as
+`<<<38d4ef6c-967f-436a-8377-ec9ba862faf2>>>`) · the **black scooter photo** (machine)
 
-> Cartoon illustration in EXACTLY the art style of the first reference: bold varied-weight ink
-> outlines, flat cel shading with cross-hatch texture accents, saturated comic-book palette.
+> Cartoon illustration: bold varied-weight ink outlines, flat cel shading, saturated comic-book
+> palette. Full-bleed, 16:9.
 >
-> **DIRECTION OF TRAVEL — THE MOST IMPORTANT FACT IN THIS IMAGE.** Ug is walking RIGHTWARD, TOWARD
-> the scooter, closing the distance to it. His head, face, chest, knees and toes ALL point RIGHT.
-> The scooter is AHEAD of him, up the track. **He is NOT walking away from it. He is NOT facing
-> left. His back is NOT turned to the scooter.** Everything else follows from this.
+> **1. DIRECTION OF TRAVEL — THE MOST IMPORTANT FACT IN THIS IMAGE.** Ug walks RIGHTWARD, TOWARD
+> the scooter, closing the distance. Head, face, chest, knees and toes ALL point RIGHT. The scooter
+> is AHEAD of him, up the track. **He is NOT walking away from it. He is NOT facing left. His back
+> is NOT turned to it.** Everything else follows from this.
 >
-> **CHARACTER — Ug.** Exactly the approved cartoon caveman.
-> **HEAD: completely bald — bare tanned scalp over the whole skull, top, temples, above the ears
-> and the entire back. NO hair anywhere, no fringe, no tufts. The head is TALL and NARROW: a long
-> vertical oval with a high domed crown and a long midface, not short or round.**
-> **FACE: CLEAN-SHAVEN. Chin, jaw and upper lip are the same skin tone as the rest of the face —
-> no beard, no goatee, no moustache, no grey patch on the lower face.** Deeply lined forehead,
-> deep-set hooded eyes, broad fleshy nose with a bump on the bridge, wide mouth, heavy jaw and
-> jowls, thick creased neck, large ears, ruddy weathered skin. A big solid man in his sixties.
-> **EXPRESSION: easy-going and good-humoured. His heavy dark brows sit LEVEL and HORIZONTAL — never
-> slanting down toward the nose, never knitted. Heavy brows read as angry only when they slant down
-> inward. Dry, warm, faintly amused; not scowling, not grinning.**
-> **BUILD: tall and solid, long legs, upright — NOT squat, NOT dwarfish, NOT a big head on a little
-> body.** Yellow-orange leopard-spotted fur tunic over one shoulder with a ragged zig-zag hem,
-> bare hairy arms and legs, big bare feet. He hauls an enormous SMOOTH knobbly wooden club —
-> rounded burls, no spikes, no studs.
+> **2. CHARACTER — Ug: <<<38d4ef6c-967f-436a-8377-ec9ba862faf2>>>**, exactly as in the element.
+> Completely bald, tall narrow domed skull, clean-shaven, level horizontal brows, easy-going and
+> good-humoured. Leopard-spotted fur tunic over one shoulder, bare arms and legs, bare feet. He
+> hauls an enormous smooth knobbly wooden club — rounded burls, no spikes.
 >
-> **THE CLUB — defined relative to his travel, not to the frame.** He grips the club's thin handle
-> end low beside his hip, and its heavy knobbly head TRAILS ALONG THE GROUND BEHIND HIM — behind
-> meaning *on the side away from the scooter*, back down the stretch of track he has already
-> covered. It gouges a furrow and kicks up dust in his wake. He is not pushing it, not swinging it,
-> not carrying it ahead of himself. **The ground between him and the scooter is clean, undisturbed
-> dirt — no furrow, no dust, nothing dragged across it.**
+> **3. HIS SIZE — judged against the farmers, never against the frame.** Stand Ug beside the
+> farmers in the paddies and he is the SAME HEIGHT as them, just heavier built. **He is NOT a
+> giant, NOT towering, NOT larger than the landscape.** An ordinary big man in an ordinary field.
 >
-> **COMPOSITION — EXTREME WIDE, staged in depth.** A very wide cinematic side-on establishing
-> shot, 16:9, camera a long way back. Two small figures in a big landscape.
-> **Ug's whole standing body occupies only about ONE THIRD of the frame height.** He is at the FAR
-> LEFT, nearest to camera, full body, mid-stride, walking toward the RIGHT along the track.
-> **The scooter sits far up the track to the RIGHT**, small in frame through perspective.
-> **A very large expanse of empty dirt track separates them — roughly a third of the frame's
-> width** — the ground he still has to cover.
-> Generous open sky across the upper third, and the paddies and karsts spread wide around them.
-> Both Ug and the scooter are fully inside the frame with a lot of air around them; nothing is
-> cropped at the edges.
+> **4. THE CLUB — defined relative to his travel, not to the frame.** He grips the thin handle end
+> low beside his hip; the heavy knobbly head TRAILS ALONG THE GROUND BEHIND HIM — behind meaning
+> *on the side away from the scooter*, back down the track he has already covered — gouging a
+> furrow and kicking up dust in his wake. Not pushing it, not swinging it, not carrying it ahead.
+> **The ground between him and the scooter is clean undisturbed dirt: no furrow, no dust.**
 >
-> **THE MACHINE — a modern Asian scooter, NOT a dirt bike and NOT a trail bike.** In the RIGHT
-> third of frame, drawn from the second reference photo: a glossy black step-through maxi-scooter
-> (Honda PCX type) — **glossy black bodywork**, tall clear windscreen, twin chrome-stalk mirrors,
-> long black bench seat with a pale grey top, smooth flowing panels, silver alloy wheels with a
-> front disc brake, a chrome exhaust, side stand down. Keep bright chrome and pale highlights on it
-> so the dark silhouette still reads as a machine and not a flat black blob.
-> **CRITICAL — WHICH WAY THE SCOOTER POINTS.** It is parked pointing AWAY from Ug, aimed up the
-> track toward the RIGHT of frame: the same direction Ug is walking, and the direction he will
-> ride off in. Pinned four ways, all of which must hold:
-> **(1)** Its REAR END is the end NEAREST Ug. **(2)** The red tail-light, rear number plate and rear
-> wheel are therefore on the LEFT-hand side of the scooter as we see it, while the front wheel,
-> forks, headlight, tall windscreen and handlebars are on the RIGHT-hand side as we see it.
-> **(3)** We are looking at the scooter's LEFT-HAND FLANK. **(4)** If Ug sat on it now he would be
-> facing RIGHT, ready to ride away to the right.
+> **5. THE MACHINE — a modern Asian scooter, NOT a dirt bike, NOT a trail bike.** Glossy black
+> step-through maxi-scooter (Honda PCX type): tall clear windscreen, twin chrome-stalk mirrors,
+> long bench seat with a pale grey top, silver alloy wheels, front disc brake, chrome exhaust, side
+> stand down. Keep bright chrome and pale highlights so it reads as a machine, not a black blob.
+>
+> **6. WHICH WAY THE SCOOTER POINTS — pinned four ways, ALL of which must hold.** It is parked
+> pointing AWAY from Ug, aimed up the track toward the RIGHT of frame: the same direction Ug walks
+> and the direction he will ride off in.
+> **(1)** Its REAR END is the end NEAREST Ug.
+> **(2)** The red tail-light, rear number plate and rear wheel are therefore on the LEFT-hand side
+> of the scooter as we see it, while the front wheel, forks, headlight, tall windscreen and
+> handlebars are on the RIGHT-hand side as we see it.
+> **(3)** We are looking at the scooter's LEFT-HAND FLANK.
+> **(4)** If Ug sat on it now he would be facing RIGHT, ready to ride away to the right.
 > **DO NOT draw the scooter facing Ug. DO NOT put the windscreen, headlight or handlebars on the
-> left-hand side.** Perfectly ordinary, modern, and completely out of place here.
+> left-hand side.**
 >
-> **SETTING — rural Vietnam.** Ug walks along a dry ochre dirt track on a raised earth bund.
-> Immediately behind him, filling the middle of the frame, are **lush green rice paddies in full
-> growth** — dense, vivid green rice standing knee-high in neat rows, low earth bunds dividing the
-> fields. Solid green fields, NOT flooded mirror-water; little or no standing water visible. Working those paddies are **Vietnamese farmers in conical straw nón lá hats** — simple
-> work shirts and rolled trousers, several bent double planting seedlings, one straightened up with
-> a bundle of rice under one arm, one further off carrying a bucket along a bund. Beyond the fields,
-> hazy grey-green **limestone karst peaks** rise out of the mist, with a few coconut palms and a
-> distant tin-roofed farm building. Warm, humid, bright daylight; soft teal-to-cream sky.
+> **7. COMPOSITION — EXTREME WIDE. THE WHOLE SCENE MUST FIT.** Camera a very long way back, locked
+> off, side-on. Two small figures in a big landscape. Ug is at the FAR LEFT, full body, mid-stride;
+> the scooter is far up the track to the RIGHT, small through perspective; a very large expanse of
+> empty dirt track separates them. Generous open sky across the upper third and wide margins on all
+> four sides — sky above, foreground track below, landscape running out past both figures. **Nothing
+> is cropped at any edge and nothing crowds the frame. If in doubt, pull back further.**
 >
-> Full-bleed illustration. No text, no captions, no watermark.
+> **8. SETTING — rural Vietnam.** A dry ochre dirt track on a raised earth bund. Behind it, filling
+> the middle of the frame, **lush green rice paddies in full growth** — dense vivid green rice
+> knee-high in neat rows, low earth bunds dividing the fields, little or no standing water. Working
+> them are **Vietnamese farmers in conical straw nón lá hats**, several bent double planting, one
+> straightened with a bundle of rice, one carrying a bucket along a bund. Beyond, hazy grey-green
+> **limestone karst peaks** in the mist, a few coconut palms, a distant tin-roofed farm building.
+> Warm humid bright daylight, soft teal-to-cream sky.
+>
+> No text, no captions, no watermark.
 
 ---
 
