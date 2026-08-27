@@ -146,3 +146,42 @@ Start image: the keyframe above.
 ## Open items
 None blocking. Everything above is locked; the next real information comes from generating a
 keyframe and looking at it, not from more discussion.
+
+---
+
+## Character lock (added after the v11 renders)
+
+Facial likeness kept drifting shot to shot. Root cause: the only reference was a
+three-quarter *front* view, while every shot in the film is a side profile — so the
+model was inventing his profile from scratch every single generation.
+
+Fix, in order:
+
+1. **Real photo references.** Four photos of Peter — front neutral, side profile,
+   three-quarter, smiling — uploaded as `image_references`, with the approved
+   caricature supplying only the drawing style. Likeness from photographs, style
+   from the cartoon.
+2. **Named identity features** instead of generic description. What makes him
+   recognisable: very heavy low-set grey brows, deep horizontal forehead creases,
+   bald tanned crown with cropped silver at the temples, deep-set hooded eyes,
+   broad fleshy nose with a bump on the bridge, wide mouth with a slight downturn,
+   heavy jaw and jowls, thick creased neck, ruddy weathered skin. Grey stubble, never
+   a beard.
+3. **Sheets, not single frames.** A full-body turnaround (front / three-quarter /
+   profile / back) and a six-portrait head-and-expression sheet, including the shock
+   and the whoop the film needs.
+4. **Reference Element next.** Register the approved sheet as a Higgsfield
+   Reference Element and address it from the prompt, so identity is carried by the
+   asset rather than by prose.
+
+### Why an Element and not a Soul
+
+| Method | Usable by | Verdict |
+|---|---|---|
+| Sheet as image reference | any model | works, but re-described every time |
+| **Reference Element** | Nano Banana Pro **and Kling 3.0** | **correct for this pipeline** |
+| Soul (trained identity) | `soul_2` / `soul_cinematic` only | cannot be used by our video model |
+
+Soul is the intuitive answer and the wrong one here: Kling 3.0 renders the film and
+cannot consume a Soul, so identity would lock for stills and break the moment it moved.
+Elements span both models we actually use.
