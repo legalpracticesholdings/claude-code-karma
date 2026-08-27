@@ -177,9 +177,25 @@ Fix, in order:
 3. **Sheets, not single frames.** A full-body turnaround (front / three-quarter /
    profile / back) and a six-portrait head-and-expression sheet, including the shock
    and the whoop the film needs.
-4. **Reference Element next.** Register the approved sheet as a Higgsfield
-   Reference Element and address it from the prompt, so identity is carried by the
+4. **Reference Element — DONE.** Ug is registered as a Higgsfield Reference Element
+   and addressed from the prompt with `<<<element_id>>>`, so identity is carried by the
    asset rather than by prose.
+
+### The Ug Element
+
+| | |
+|---|---|
+| Name | `Ug` |
+| Element id | `38d4ef6c-967f-436a-8377-ec9ba862faf2` |
+| Source image | image_job `33becc69-e3df-4b69-b33a-e2eac3be77e7` |
+
+Usage: embed `<<<38d4ef6c-967f-436a-8377-ec9ba862faf2>>>` inside the prompt of
+`generate_image` or `generate_video`. Works with Nano Banana Pro and Kling 3.0.
+
+The source is a cartoonisation of a **photograph of Peter actually wearing the
+costume and holding a club**. That photo is what finally settled the likeness after
+roughly twenty renders of describing his face in prose. The lesson is worth keeping:
+when likeness matters, get real reference rather than better adjectives.
 
 ### Why an Element and not a Soul
 
