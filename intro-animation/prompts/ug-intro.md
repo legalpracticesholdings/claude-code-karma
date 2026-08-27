@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v14 (Ug is pudgy, not muscular; end frame added)
+**Version:** v15 (build calibrated between athlete and fat man)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -8,6 +8,9 @@
 - 3 seconds, 16:9, cold open, cuts on action.
 
 ## Changelog
+- **v15** — **build dialled back.** v14 said "pudgy" and the model went straight to a pot belly. The
+  target is the midpoint: muscle definition gone, but not a fat man. Stated as remove-this / add-a-
+  little / do-not-exceed rather than a single adjective, because one adjective always gets amplified.
 - **v14** — **build clause added: pudgy, never muscular.** Left unspecified, the model kept drawing
   a gym physique. Ug is a big soft bloke; the joke is funnier when he is not an athlete. Stated with
   explicit negatives because "not muscular" alone does not survive.
@@ -70,11 +73,13 @@ References: the **Ug Reference Element** (character + likeness, embedded in the 
 > good-humoured. Leopard-spotted fur tunic over one shoulder, bare arms and legs, bare feet. He
 > hauls an enormous smooth knobbly wooden club — rounded burls, no spikes.
 >
-> **2b. HIS BUILD — SOFT AND PUDGY, NEVER MUSCULAR.** A round pot belly over and under the tunic,
-> soft rounded chest, thick doughy arms and legs, plump forearms, heavy soft thighs. **No pectoral
-> definition, no abs, no six-pack, no bulging biceps, no shoulder definition, no visible sinew.** A
-> big soft comically out-of-shape bloke, not an athlete. Round and cuddly — and still the same
-> height as the farmers, just wider.
+> **2b. HIS BUILD — SOFTENED, BUT ONLY PART OF THE WAY.** A solidly built middle-aged bloke who has
+> gone a bit soft. **Remove:** pectoral definition, abs, six-pack, bulging biceps, shoulder cut,
+> visible sinew — smooth, undefined, unathletic. **Add, modestly:** a slight softening of the belly,
+> gentle roundness through chest and shoulders, arms and legs a little thicker at the edges.
+> **How far — this is a SMALL adjustment.** No big round pot belly, no beach-ball gut, no hanging
+> paunch. **Not obese, not fat, not round, not chubby.** If in doubt, do less. Same height and
+> silhouette proportions as before — only less muscular.
 >
 > **3. HIS SIZE — judged against the farmers, never against the frame.** Stand Ug beside the
 > farmers in the paddies and he is the SAME HEIGHT as them, just heavier built. **He is NOT a
