@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v13 (proven constraints restored, prompt is numbered so nothing gets cut again)
+**Version:** v14 (Ug is pudgy, not muscular; end frame added)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -8,6 +8,15 @@
 - 3 seconds, 16:9, cold open, cuts on action.
 
 ## Changelog
+- **v14** — **build clause added: pudgy, never muscular.** Left unspecified, the model kept drawing
+  a gym physique. Ug is a big soft bloke; the joke is funnier when he is not an athlete. Stated with
+  explicit negatives because "not muscular" alone does not survive.
+- **v14** — **Prompt C added**: the end frame (wheelie, club discarded, farmers cheering), generated
+  from the approved start frame as an image reference so setting, scooter and camera stay locked.
+- **v14** — **the "UG" title stamp is composited, not generated.** Kling smears lettering when it has
+  to interpolate text across three seconds, so the end frame is generated clean and the title is
+  burned on afterwards with the ffmpeg pipeline from the hand-coded version. Crisp letters, and the
+  stamp can be timed to the wheelie.
 - **v13** — **the doc is now the prompt.** Prompt A is sent verbatim, numbered section by section.
   Every regression so far — the beard, the pushed club, the giant, and twice the scooter facing the
   wrong way — came from re-typing a shortened prompt into the API call and dropping a clause that
@@ -60,6 +69,12 @@ References: the **Ug Reference Element** (character + likeness, embedded in the 
 > Completely bald, tall narrow domed skull, clean-shaven, level horizontal brows, easy-going and
 > good-humoured. Leopard-spotted fur tunic over one shoulder, bare arms and legs, bare feet. He
 > hauls an enormous smooth knobbly wooden club — rounded burls, no spikes.
+>
+> **2b. HIS BUILD — SOFT AND PUDGY, NEVER MUSCULAR.** A round pot belly over and under the tunic,
+> soft rounded chest, thick doughy arms and legs, plump forearms, heavy soft thighs. **No pectoral
+> definition, no abs, no six-pack, no bulging biceps, no shoulder definition, no visible sinew.** A
+> big soft comically out-of-shape bloke, not an athlete. Round and cuddly — and still the same
+> height as the farmers, just wider.
 >
 > **3. HIS SIZE — judged against the farmers, never against the frame.** Stand Ug beside the
 > farmers in the paddies and he is the SAME HEIGHT as them, just heavier built. **He is NOT a
