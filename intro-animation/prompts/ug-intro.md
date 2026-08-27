@@ -1,6 +1,6 @@
 # Ug Intro — living prompt
 
-**Version:** v15 (build calibrated between athlete and fat man)
+**Version:** v16 (build locked, film shot)
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
@@ -8,6 +8,15 @@
 - 3 seconds, 16:9, cold open, cuts on action.
 
 ## Changelog
+- **v16** — **build locked**: all muscle definition removed, plus a modest soft belly stated as
+  "about half the size of a full pot belly". Naming the halfway point explicitly worked where both
+  "pudgy" (too far) and "soften slightly" (not far enough) had missed.
+- **v16** — **the film shoots from the start frame alone**, no end keyframe. One approved frame plus
+  a timed beat list gives Kling the whole three seconds in a single pass; a second keyframe doubles
+  the approval rounds and risks the two frames disagreeing. Keep the end frame in reserve as a
+  second lever if the action drifts.
+- **v16** — **Kling intercepts the prompt with an unrelated preset** ("IN THE DARK"). Decline it with
+  `declined_preset_id` and resubmit identically; the literal generation then goes through.
 - **v15** — **build dialled back.** v14 said "pudgy" and the model went straight to a pot belly. The
   target is the midpoint: muscle definition gone, but not a fat man. Stated as remove-this / add-a-
   little / do-not-exceed rather than a single adjective, because one adjective always gets amplified.
@@ -129,44 +138,34 @@ References: the **Ug Reference Element** (character + likeness, embedded in the 
 
 ## Prompt B — the 3-second film (video)
 
-Start image: the keyframe above.
+Model **kling3_0** · `duration: 3` · `sound: "on"` · `medias: [{role: "start_image", value: <approved
+start frame job id>}]` · decline the preset interception with `declined_preset_id`.
 
-> Continuous single side-on tracking shot. 2D cartoon animation holding the EXACT art style,
-> colours and character design of the starting frame — Ug's face and likeness stay identical
-> throughout, and the scooter stays the same glossy black step-through scooter facing screen right.
+> Locked-off wide camera, never moves. Cartoon style exactly as the start frame. Everything travels
+> LEFT TO RIGHT.
 >
-> **THE CAMERA IS LOCKED OFF.** One static wide shot. Do not cut, do not zoom, do not track. Ug and
-> the scooter both stay inside the frame the entire time; the action travels left to right across
-> the shot rather than the camera following it. Only at the very end may the frame drift slightly
-> right as he goes.
+> **BEAT 1 (0.0–0.8s)** Ug trudges RIGHTWARD toward the parked black scooter, the heavy knobbly head
+> of his club DRAGGING along the ground behind him on his left, gouging a furrow and kicking dust.
+> **BEAT 2 (0.8–1.1s)** He stops dead and jolts upright, eyes wide, spotting the scooter ahead.
+> **BEAT 3 (1.1–1.5s)** He flings the club away BEHIND him to the LEFT; it tumbles end over end.
+> **BEAT 4 (1.5–2.1s)** He charges and VAULTS clean over the scooter in one bound, landing astride.
+> **BEAT 5 (2.1–2.5s)** The FRONT WHEEL snaps up into a huge wheelie, rear wheel boiling up dust.
+> **BEAT 6 (2.5–3.0s)** He tears away to the RIGHT, grinning, and exits the right edge of frame.
 >
-> **The beats, in this exact order:**
-> **1.** Ug trudges from the far left toward the scooter, the club's heavy head DRAGGING along the
-> ground behind him to the left, gouging a furrow and kicking up dust in his wake.
-> **2.** He stops dead and jolts upright, eyes wide — he has spotted it.
-> **3.** He flings the club away behind him to the LEFT; it spins off out of frame.
-> **4.** He charges the last stretch of track and **VAULTS clean over the scooter in one bound,
-> landing astride the seat**.
-> **5.** The scooter's **front wheel snaps up into an improbable wheelie**.
-> **6.** He tears away to the RIGHT in a billowing cloud of ochre dust and exits the frame.
+> Throughout: the scooter always points RIGHT — windscreen, headlight and handlebars at its right
+> end, tail-light and rear wheel at its left end. Ug always faces and travels RIGHT. He never turns
+> around, never walks left, never rides left.
 >
-> Play the vault and the wheelie big and cartoonish — this tiny commuter scooter absolutely should
-> not be able to do either, and that is the joke.
+> The farmers glance up from the rice as he passes, then cheer and raise their arms as he roars away.
 >
-> **SOUND: the scooter must roar like a huge American V8 muscle car** — a deep, thunderous,
-> guttural big-block bellow, throttle blipping and then howling flat out as he tears away.
-> Absolutely NOT a scooter sound: no small-engine buzz, no moped whine, no 125cc rasp. The engine
-> note should be comically, impossibly oversized for the machine making it.
->
-> Behind him the rice paddies and the farmers in conical hats work on throughout — bending,
-> planting, the green rice swaying. As Ug tears past, **one or two of the nearest farmers straighten up
-> and turn to follow him**, the wide brims of their conical hats swinging round to track him.
-> Keep this fleeting — a brief background glance caught in passing, never a staged reaction, never
-> a pause in their work. They stay small and soft in the depth of field, the camera never cuts to
-> them, and Ug remains the focus of the shot throughout.
->
-> Camera pans right to follow him. Hand-drawn cartoon animation, bold ink outlines, flat cel
-> shading. No text, no captions, no subtitles, no watermark.
+> **SOUND:** the scooter must ROAR like a huge American V8 muscle car — deep guttural big-block
+> rumble, a hard throaty revving bellow, a roaring pull-away with tyre chirp. Absolutely NOT a
+> scooter sound: no small-engine buzz, no moped whine, no 125cc rasp. Plus the scrape of the
+> dragging club, a comic whoosh-thump as it lands, and faint cheering.
+
+### Post
+The **"UG"** starburst title is composited afterwards with the ffmpeg pipeline, not generated — a
+video model smears lettering it has to interpolate. Generate clean, stamp the title on the wheelie.
 
 ---
 
