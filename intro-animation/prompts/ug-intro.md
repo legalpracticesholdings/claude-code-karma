@@ -1,6 +1,17 @@
 # Ug Intro — living prompt
 
-**Version:** v16 (build locked, film shot)
+**Version:** v16 — **APPROVED TAKE**
+
+## Approved take — Ug intro v1 (Vietnam scooter)
+
+| | |
+|---|---|
+| Video job | `b3a43ef3-104e-4469-a78f-92d55d6e2329` (kling3_0, 3s, 16:9, sound on) |
+| Start frame | `544b51d1-7da4-4871-8236-901b73b46238` |
+| Ug element | `38d4ef6c-967f-436a-8377-ec9ba862faf2` |
+| Prompt | Prompt A (start frame) + Prompt B (film), both below, sent verbatim |
+
+Signed off by Graham. Outstanding: the composited **"UG"** title stamp (see Prompt B → Post).
 
 ## Locked context
 - Character is **Ug**: Pete as a bald caveman. Locked to the approved caricature.
